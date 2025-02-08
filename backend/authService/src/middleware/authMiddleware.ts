@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import jwt, {JwtPayload} from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import {IUser, User} from '../models/userModel';
 import mongoose from "mongoose";
@@ -38,12 +38,7 @@ export const authenticateToken = async (req: AuthRequest, res: Response, next: N
         req.userId = new mongoose.Types.ObjectId(user._id);
 
     } catch (err) {
-
         const error = err as Error;
-
-        // Type assertion to treat 'err' as an instance of Error
-        // Handle errors during token verification (like expiration, tampering, etc.)
-
         if (error.name === 'TokenExpiredError') {
             res.status(403).json({ message: 'Token expired.' });
         }
