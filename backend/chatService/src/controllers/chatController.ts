@@ -42,7 +42,7 @@ export const saveMessage = async(req: AuthRequest, res: Response, next: NextFunc
             const encryptionResult = encryptFn(content);
 
             room.chats.push({
-                timestamps: new Date(),
+                timestamps: timestamps,
                 sender: req.user as unknown as mongoose.Types.ObjectId,
                 dataType: type,
                 encryptedContent: encryptionResult.encryptedData,
