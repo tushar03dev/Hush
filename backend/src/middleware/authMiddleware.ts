@@ -1,11 +1,17 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt, {JwtPayload} from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import { User } from '../models/userModel';
+import {IUser, User} from '../models/userModel';
+import mongoose from "mongoose";
 
 dotenv.config();
 
-export const authenticateToken = async (req: Request, res: Response, next: NextFunction):Promise<void> => {
+// Extend Express Request type to include `userId`
+export interface AuthRequest extends Request {
+    userId?: mongoose.Types.ObjectId;
+}
+
+export const authenticateToken = async (req: AuthRequest, res: Response, next: NextFunction):Promise<void> => {
     const token = req.headers['authorization'];
 
     // Check if token is missing
@@ -16,27 +22,21 @@ export const authenticateToken = async (req: Request, res: Response, next: NextF
 
     try {
         // Verify the token using the secret
-        const decoded = jwt.verify(token, process.env.JWT_SECRET!);
-
-        // Type guard to check if decoded is an object (JwtPayload) and has a userId property
-        if (typeof decoded === 'object' && decoded !== null && 'userId' in decoded) {
-            const { userId } = decoded as JwtPayload & { userId: string };
-
-            // Find the user by ID attached to the token
-            const user = await User.findById(userId);
-
-            // If no user found, reject with an error
-            if (!user) {
-                res.status(401).json({ message: 'Invalid token: User not found.' });
-                return;
-            }
-
-            // Attach the found user to the request object for further use
-            (req as any).user = user;
-            next();  // Pass control to the next middleware or route handler
-        } else {
-            res.status(403).json({ message: 'Invalid token payload.' });
+        const decoded = jwt.verify(token, process.env.JWT_SECRET!) as {email: string};
+        if (!decoded.email) {
+            res.status(400).json({ message: "Invalid token: No email found" });
+            return;
         }
+
+        // Find the user by email
+        const user: IUser | null = await User.findOne({ email: decoded.email });
+        if (!user) {
+            res.status(404).json({ message: "User not found" });
+            return;
+        }
+
+        req.userId = new mongoose.Types.ObjectId(user._id);
+
     } catch (err) {
 
         const error = err as Error;
@@ -49,7 +49,6 @@ export const authenticateToken = async (req: Request, res: Response, next: NextF
         }
 
         console.error('Token verification error:', error);  // Log the error for debugging
-
         res.status(403).json({ message: 'Invalid token.' });
     }
 };

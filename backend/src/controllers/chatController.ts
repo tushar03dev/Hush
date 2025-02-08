@@ -1,9 +1,14 @@
 import {NextFunction, Request, Response} from 'express';
 import {ChatRoom} from "../models/chatRoomModel";
-import {encryptText} from "../utils/encryptDecrypt";
+import {encryptText} from "../utils/textEncryption";
+import mongoose from "mongoose";
+import * as fs from "node:fs";
+import {encryptAudio, encryptMedia} from "../utils/avEncryption";
+import {encryptImage} from "../utils/imageEncryption";
+import {AuthRequest} from "../middleware/authMiddleware";
 
 
-export const chatPost = async(req: Request, res: Response, next: NextFunction) => {
+export const saveMessage = async(req: AuthRequest, res: Response, next: NextFunction) => {
     const {roomId, timestamps, type, data} = req.body;
     if (!data) {
         return res.status(400).send("No message found!");
@@ -19,12 +24,30 @@ export const chatPost = async(req: Request, res: Response, next: NextFunction) =
         return res.status(400).send("You don't have access to this chat!");
     }
 
-    if(type === "text") {
-        const encryptedContent = encryptText(data);
-        
+    const encryptFunctions = {
+        text: encryptText,
+        video: encryptMedia,
+        audio: encryptAudio,
+        image: encryptImage,
+    } as const;
+
+    if (type in encryptFunctions) {
+        const encryptFn = encryptFunctions[type as keyof typeof encryptFunctions];
+        const content = type === 'text' ? data : fs.readFileSync(data);
+
+        const encryptionResult = encryptFn(content);
+
+        room.chats.push({
+            timestamps: new Date(),
+            sender: req.userId as mongoose.Types.ObjectId,
+            dataType: type,
+            encryptedContent: encryptionResult.encryptedData,
+            iv: encryptionResult.iv,
+            ...(type !== "text" ? { tag: (encryptionResult as { encryptedData: string; iv: string; tag: string }).tag } : {}),
+        });
+
+        await room.save();
+        return res.status(200).send(`${type.charAt(0).toUpperCase() + type.slice(1)} message saved!`);
     }
-
-
-
 
 };
