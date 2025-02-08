@@ -35,7 +35,7 @@ export const authenticateToken = async (req: AuthRequest, res: Response, next: N
             return;
         }
 
-        req.userId = new mongoose.Types.ObjectId(user._id);
+        req.userId = user._id;
 
     } catch (err) {
         const error = err as Error;

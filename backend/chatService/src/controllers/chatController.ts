@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 import * as fs from "node:fs";
 import {encryptAudio, encryptMedia} from "../utils/avEncryption";
 import {encryptImage} from "../utils/imageEncryption";
-import {AuthRequest} from "../middleware/authMiddleware";
+import {AuthRequest} from "../middleware/authenticateToken";
 
 
 export const saveMessage = async(req: AuthRequest, res: Response, next: NextFunction) => {
@@ -39,7 +39,7 @@ export const saveMessage = async(req: AuthRequest, res: Response, next: NextFunc
 
         room.chats.push({
             timestamps: new Date(),
-            sender: req.userId as mongoose.Types.ObjectId,
+            sender: req.user as unknown as mongoose.Types.ObjectId,
             dataType: type,
             encryptedContent: encryptionResult.encryptedData,
             iv: encryptionResult.iv,
