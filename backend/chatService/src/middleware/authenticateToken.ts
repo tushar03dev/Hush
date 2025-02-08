@@ -12,10 +12,11 @@ export interface AuthRequest extends Request {
     userId?: mongoose.Types.ObjectId;
 }
 
-export const authenticateToken = async (req: Request, res: Response, next: NextFunction) => {
+export const authenticateToken = async (req: Request, res: Response, next: NextFunction):Promise<void> => {
     const token = req.headers.authorization?.split(' ')[0] as string;
     if (!token) {
-        return res.status(401).send({ message: 'Unauthorized: No token provided' })
+        res.status(401).send({ message: 'Unauthorized: No token provided' });
+        return;
     }
 
     try{
@@ -26,6 +27,7 @@ export const authenticateToken = async (req: Request, res: Response, next: NextF
         req.user = response.data.user;
         next();
     } catch(err) {
-        return res.status(401).json({ message: 'Unauthorized: Invalid token' });
+        res.status(401).json({ message: 'Unauthorized: Invalid token' });
+        return;
     }
 }

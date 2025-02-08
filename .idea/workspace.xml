@@ -4,30 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df8e7eea-52dd-4b96-aec7-56900cc12d1a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/authService/src/config/nodemailerConfig.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/authService/src/controllers/authController.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/authService/src/controllers/chatController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chatService/src/controllers/chatController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/authService/src/controllers/otpController.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/authService/src/middleware/authMiddleware.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/authService/src/models/chatRoomModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chatService/src/models/chatRoomModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/authService/src/routes/authRoutes.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/authService/src/routes/otpRoutes.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/authService/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/authService/src/server.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/authService/src/utils/avEncryption.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chatService/src/utils/avEncryption.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/authService/src/utils/imageEncryption.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chatService/src/utils/imageEncryption.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/authService/src/utils/textEncryption.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chatService/src/utils/textEncryption.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/chatService/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chatService/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/chatService/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chatService/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/chatService/src/config/nodemailerConfig.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/chatService/src/controllers/authController.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/chatService/src/controllers/otpController.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/chatService/src/middleware/authMiddleware.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/chatService/src/models/userModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chatService/src/models/userModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/chatService/src/routes/authRoutes.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/chatService/src/routes/otpRoutes.ts" beforeDir="false" />
-    </list>
+    <list default="true" id="df8e7eea-52dd-4b96-aec7-56900cc12d1a" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -109,11 +86,22 @@
       <option name="presentableId" value="Default" />
       <updated>1739009150597</updated>
       <workItem from="1739009152251" duration="11359000" />
-      <workItem from="1739045235959" duration="3335000" />
+      <workItem from="1739045235959" duration="3642000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/backend/authService/src/routes/otpRoutes.ts</url>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
