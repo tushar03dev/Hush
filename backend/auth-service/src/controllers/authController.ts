@@ -4,18 +4,18 @@ import jwt from 'jsonwebtoken';
 import {User} from '../models/userModel';
 import dotenv from 'dotenv';
 import {sendOTP, verifyOTP} from "./otpController";
+import {generateName} from "../utils/nameGenerator";
 
 dotenv.config();
-
 
 let tempUser: any; // Temporary storage for user details
 
 export const signUp = async (req: Request, res: Response, next: NextFunction) => {
-    const { name, email, password } = req.body;
+    const { email, password } = req.body;
 
     // Check if all required fields are present
-    if (!name || !email || !password) {
-        return res.status(400).json({ message: 'All fields (name, email, password) are required.' });
+    if (!email || !password) {
+        return res.status(400).json({ message: 'email and password are required.' });
     }
 
     try {
@@ -25,6 +25,7 @@ export const signUp = async (req: Request, res: Response, next: NextFunction) =>
         }
 
         // Temporarily store the user details (before OTP verification)
+        const name = generateName();
         tempUser = { name, email, password };
 
         // Send OTP
