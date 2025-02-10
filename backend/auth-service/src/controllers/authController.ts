@@ -5,6 +5,8 @@ import {User} from '../models/userModel';
 import dotenv from 'dotenv';
 import {sendOTP, verifyOTP} from "./otpController";
 import {generateName} from "../utils/nameGenerator";
+import {publishToQueue} from "../utils/rabbitmq";
+import {Session} from "../models/sessionModel";
 
 dotenv.config();
 
@@ -12,7 +14,6 @@ let tempUser: any; // Temporary storage for user details
 
 export const signUp = async (req: Request, res: Response, next: NextFunction) => {
     const { email, password } = req.body;
-
     // Check if all required fields are present
     if (!email || !password) {
         return res.status(400).json({ message: 'email and password are required.' });
@@ -26,6 +27,7 @@ export const signUp = async (req: Request, res: Response, next: NextFunction) =>
 
         // Temporarily store the user details (before OTP verification)
         const name = generateName();
+        console.log(`Your new generated name: ${name}`);
         tempUser = { name, email, password };
 
         // Send OTP
@@ -56,7 +58,8 @@ export const completeSignUp = async (req: Request, res: Response, next: NextFunc
             }
 
             // Hash the password
-            const hashedPassword = await bcrypt.hash(tempUser.password, 10);
+            const salt = await bcrypt.genSalt(10);
+            const hashedPassword = await bcrypt.hash(tempUser.password, salt);
 
             // Create the new user
             const user = new User({ name: tempUser.name, email: tempUser.email, password: hashedPassword });
@@ -66,7 +69,17 @@ export const completeSignUp = async (req: Request, res: Response, next: NextFunc
             tempUser = null;
 
             // Generate JWT token
-            const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET as string, { expiresIn: '2h' });
+            const token = jwt.sign({ userId: user._id, email: user.email }, process.env.JWT_SECRET as string, { expiresIn: "1h" });
+
+            // Store session in DB
+            await Session.updateOne(
+                { userId: user._id },
+                { $set: { token, updatedAt: new Date() } },
+                { upsert: true }
+            );
+
+            // Publish session to RabbitMQ
+            await publishToQueue("authQueue", { userId: user._id, token });
 
             // Respond with token and success message
             res.status(201).json({ token, message: 'User signed up successfully.' });
@@ -96,6 +109,17 @@ export const signIn = async (req: Request, res: Response, next: NextFunction) =>
         }
 
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET as string, { expiresIn: '1h' });
+
+        // Store session in DB
+        await Session.updateOne(
+            { userId: user._id },
+            { $set: { token, updatedAt: new Date() } },
+            { upsert: true }
+        );
+
+        // Publish to RabbitMQ queue
+        await publishToQueue("authQueue", { userId: user._id, token });
+
         res.json({ token });
         return;
     } catch (err) {

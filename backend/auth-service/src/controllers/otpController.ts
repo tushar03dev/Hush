@@ -15,11 +15,11 @@ export const sendOTP = async (email: string) => {
     await transporter.sendMail({
         from: process.env.EMAIL_USER,
         to: email,
-        subject: 'Your Alertify verification OTP Code',
+        subject: 'Your Hush verification OTP Code',
         text: `Your OTP code is ${otp}. It will expire in 5 minutes.`,
     });
 
-    return token; // Optionally return the token if needed for later verification
+    return token;
 };
 
 // Verify OTP

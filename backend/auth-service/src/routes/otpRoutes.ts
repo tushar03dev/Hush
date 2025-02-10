@@ -10,4 +10,3 @@ router.post('/verify', (req: Request, res: Response, next: NextFunction) => {
 });
 
 export default router;
-

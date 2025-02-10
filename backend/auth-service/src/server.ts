@@ -21,7 +21,7 @@ app.use(upload.none());
 connectDB();
 
 // Use the auth routes
-app.use('/api/auth', authRoutes); // Mounts the auth routes
+app.use('/auth', authRoutes); // Mounts the auth routes
 
 // Use the auth routes
 app.use('/otp',otpRoutes); // Mounts the auth routes

@@ -1,33 +1,35 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
-export interface IChatRoom extends Document {
-    room: mongoose.Types.ObjectId;
-    participants: mongoose.Types.ObjectId[];
+export interface IRoom extends Document {
+    name: string;
+    members: mongoose.Types.ObjectId[];
     admins: mongoose.Types.ObjectId[];
     chats: {
+        roomId: mongoose.Types.ObjectId;
         timestamps: Date;
         sender: mongoose.Types.ObjectId;
         dataType: 'video' |  'audio' | 'text' | 'image';
-        encryptedContent: string | { video: string; text: string }; // AES for text, AES-GCM for media
+        encryptedContent: string | { video: string; text: string };
         iv: string;
         tag?: string; //  authentication tag for AES-GCM
     }[];
 }
 
-const ChatRoomSchema = new Schema<IChatRoom>({
-    room: { type: Schema.Types.ObjectId, required: true },
-    participants: [{ type: Schema.Types.ObjectId, ref: 'User', required: true }],
+const RoomSchema = new Schema<IRoom>({
+    name: { type: String, required: true },
+    members: [{ type: Schema.Types.ObjectId, ref: 'User', required: true }],
     admins: [{ type: Schema.Types.ObjectId, ref: 'User', required: true }],
     chats: [
         {
+            roomId: {type: Schema.Types.ObjectId, ref: 'Room', required: true},
             timestamps: { type: Date, default: Date.now },
             sender: { type: Schema.Types.ObjectId, ref: 'User', required: true },
             dataType: { type: String, enum: ['video','audio', 'text', 'image'], required: true },
-            encryptedContent: { type: Schema.Types.Mixed, required: true }, // Stores encrypted data
+            encryptedContent: { type: Schema.Types.Mixed, required: true },
             iv: { type: String, required: true },
             tag: { type: String }, //  authentication tag for AES-GCM
         },
     ],
 });
 
-export const ChatRoom = mongoose.model<IChatRoom>('ChatRoom', ChatRoomSchema);
+export const Room = mongoose.model<IRoom>('ChatRoom', RoomSchema);
