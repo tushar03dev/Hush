@@ -4,7 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df8e7eea-52dd-4b96-aec7-56900cc12d1a" name="Changes" comment="" />
+    <list default="true" id="df8e7eea-52dd-4b96-aec7-56900cc12d1a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/config/db.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/config/db.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/controllers/authController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/controllers/authController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/utils/authConsumer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/utils/authConsumer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/utils/nameGenerator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/utils/nameGenerator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/utils/rabbitmq.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/utils/rabbitmq.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/package.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,6 +25,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="package.json" />
         <option value="TypeScript File" />
       </list>
     </option>
@@ -47,7 +60,9 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/tushar/Documents/Projects/Hush/backend/chatService/src&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;18.19.1&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;18.19.75&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/tushar/Documents/Projects/Alertify&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -63,11 +78,11 @@
       <recent name="$PROJECT_DIR$/backend/chatService/src/models" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/backend/auth-service/src/utils" />
+      <recent name="$PROJECT_DIR$/backend/authService/src" />
       <recent name="$PROJECT_DIR$/backend/chatService/src/controllers" />
       <recent name="$PROJECT_DIR$/backend/chatService/src/models" />
       <recent name="$PROJECT_DIR$/backend/chatService/src" />
-      <recent name="$PROJECT_DIR$/backend/authService" />
-      <recent name="$PROJECT_DIR$/backend" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -86,7 +101,12 @@
       <option name="presentableId" value="Default" />
       <updated>1739009150597</updated>
       <workItem from="1739009152251" duration="11359000" />
-      <workItem from="1739045235959" duration="3642000" />
+      <workItem from="1739045235959" duration="7291000" />
+      <workItem from="1739208857937" duration="9387000" />
+      <workItem from="1739274351885" duration="1596000" />
+      <workItem from="1739299287026" duration="470000" />
+      <workItem from="1739343483734" duration="6020000" />
+      <workItem from="1739351371261" duration="7277000" />
     </task>
     <servers />
   </component>
@@ -98,7 +118,6 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/backend/authService/src/routes/otpRoutes.ts</url>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

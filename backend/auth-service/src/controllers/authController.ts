@@ -33,7 +33,6 @@ export const signUp = async (req: Request, res: Response, next: NextFunction) =>
         // Send OTP
         const otpToken = await sendOTP(email); // Call sendOTP directly
         return res.status(200).json({ otpToken, message: 'OTP sent to your email. Please enter the OTP to complete sign-up.' });
-
     } catch (err) {
         next(err);
     }
@@ -61,25 +60,20 @@ export const completeSignUp = async (req: Request, res: Response, next: NextFunc
             const salt = await bcrypt.genSalt(10);
             const hashedPassword = await bcrypt.hash(tempUser.password, salt);
 
+            // Generate the anonymous name for user
+            const name =  await generateName();
+
             // Create the new user
-            const user = new User({ name: tempUser.name, email: tempUser.email, password: hashedPassword });
-            await user.save();
+            await(publishToQueue("signupQueue",{name,email:tempUser.email,hashedPassword}));
+
+            // Generate JWT token
+            const token = jwt.sign({ email: tempUser.email }, process.env.JWT_SECRET as string, { expiresIn: "1h" });
+
+            // Publish session to RabbitMQ
+            await publishToQueue("authQueue", { email:tempUser.email, token });
 
             // Clear the tempUser once sign-up is complete
             tempUser = null;
-
-            // Generate JWT token
-            const token = jwt.sign({ userId: user._id, email: user.email }, process.env.JWT_SECRET as string, { expiresIn: "1h" });
-
-            // Store session in DB
-            await Session.updateOne(
-                { userId: user._id },
-                { $set: { token, updatedAt: new Date() } },
-                { upsert: true }
-            );
-
-            // Publish session to RabbitMQ
-            await publishToQueue("authQueue", { userId: user._id, token });
 
             // Respond with token and success message
             res.status(201).json({ token, message: 'User signed up successfully.' });
@@ -108,17 +102,10 @@ export const signIn = async (req: Request, res: Response, next: NextFunction) =>
             return;
         }
 
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET as string, { expiresIn: '1h' });
+        const token = jwt.sign({ email:email }, process.env.JWT_SECRET as string, { expiresIn: '1h' });
 
-        // Store session in DB
-        await Session.updateOne(
-            { userId: user._id },
-            { $set: { token, updatedAt: new Date() } },
-            { upsert: true }
-        );
-
-        // Publish to RabbitMQ queue
-        await publishToQueue("authQueue", { userId: user._id, token });
+        // Publish Session to RabbitMQ queue
+        await publishToQueue("authQueue", { userId: email, token });
 
         res.json({ token });
         return;

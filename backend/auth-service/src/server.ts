@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import connectDB from './config/db';
 import multer from 'multer';
 import otpRoutes from "./routes/otpRoutes";
+import {authConsumer} from "./utils/authConsumer";
 
 dotenv.config();
 
@@ -18,7 +19,7 @@ const upload = multer();
 app.use(upload.none());
 
 // MongoDB Connection
-connectDB();
+connectDB().then(()=> authConsumer());
 
 // Use the auth routes
 app.use('/auth', authRoutes); // Mounts the auth routes

@@ -8,7 +8,7 @@ dotenv.config();
 
 // Extend Express Request type to include `userId`
 export interface AuthRequest extends Request {
-    userId?: mongoose.Types.ObjectId;
+    userId?: string;
 }
 
 export const authenticateToken = async (req: AuthRequest, res: Response, next: NextFunction):Promise<void> => {
@@ -35,7 +35,7 @@ export const authenticateToken = async (req: AuthRequest, res: Response, next: N
             return;
         }
 
-        req.userId = user._id;
+        req.userId = decoded.email;
 
     } catch (err) {
         const error = err as Error;
