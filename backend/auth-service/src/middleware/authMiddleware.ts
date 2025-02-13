@@ -36,7 +36,7 @@ export const authenticateToken = async (req: AuthRequest, res: Response, next: N
         }
 
         req.userId = decoded.email;
-
+        res.json({ userId: req.userId });
     } catch (err) {
         const error = err as Error;
         if (error.name === 'TokenExpiredError') {

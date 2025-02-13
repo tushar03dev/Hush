@@ -1,7 +1,6 @@
 import amqp from "amqplib";
 import { User } from "../models/userModel";
 import { Session } from "../models/sessionModel";
-import bcrypt from "bcryptjs";
 import Redis from "ioredis";
 import dotenv from "dotenv";
 
@@ -34,7 +33,7 @@ async function processSignups(channel: amqp.Channel) {
         batch.push({
             name,
             email,
-            password: await bcrypt.hash(password, 10),
+            password,
         });
 
         channel.ack(msg);

@@ -1,10 +1,10 @@
 import express from "express";
-import { authenticateUser } from "../middleware/authMiddleware";
+import {authenticateUser, AuthRequest} from "../middleware/authMiddleware";
 
 const router = express.Router();
 
-router.get("/protected", authenticateUser, (req, res) => {
-    res.json({ message: "You are authorized", user: req.user });
+router.get("/protected", authenticateUser, (req: AuthRequest, res) => {
+    res.json({ message: "You are authorized", user: req.userId });
 });
 
 export default router;

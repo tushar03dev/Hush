@@ -13,7 +13,7 @@ export interface AuthRequest extends Request {
 }
 
 export const authenticateUser = async (req: AuthRequest, res: Response, next: NextFunction):Promise<void> => {
-    const token = req.headers.authorization?.split(' ')[0] as string;
+    const token = req.headers.authorization?.split(' ')[1] as string;
     if (!token) {
         res.status(401).send({ message: 'Unauthorized: No token provided' });
         return;
@@ -24,7 +24,7 @@ export const authenticateUser = async (req: AuthRequest, res: Response, next: Ne
             headers: { Authorization: `Bearer ${token}` }
         });
 
-        req.userId = response.data.user;
+        req.userId = response.data.userId;
         next();
     } catch(err) {
         res.status(401).json({ message: 'Unauthorized: Invalid token' });
