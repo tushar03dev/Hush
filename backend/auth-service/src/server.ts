@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import connectDB from './config/db';
 import multer from 'multer';
 import otpRoutes from "./routes/otpRoutes";
-import {authConsumer} from "./utils/authConsumer";
+import {authConsumer} from "./consumers/authConsumer";
 
 dotenv.config();
 
