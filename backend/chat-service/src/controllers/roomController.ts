@@ -1,5 +1,5 @@
 import {ChatRoom} from "../models/chatRoomModel";
-import {AuthRequest} from "../middleware/authenticateToken";
+import {AuthRequest} from "../middleware/authMiddleware";
 import mongoose from "mongoose";
 
 

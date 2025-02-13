@@ -5,8 +5,7 @@ import {User} from '../models/userModel';
 import dotenv from 'dotenv';
 import {sendOTP, verifyOTP} from "./otpController";
 import {generateName} from "../utils/nameGenerator";
-import {publishToQueue} from "../utils/rabbitmq";
-import {Session} from "../models/sessionModel";
+import {publishToQueue} from "../config/rabbitmq";
 
 dotenv.config();
 
@@ -31,7 +30,7 @@ export const signUp = async (req: Request, res: Response, next: NextFunction) =>
         tempUser = { name, email, password };
 
         // Send OTP
-        const otpToken = await sendOTP(email); // Call sendOTP directly
+        const otpToken = await sendOTP(email);
         return res.status(200).json({ otpToken, message: 'OTP sent to your email. Please enter the OTP to complete sign-up.' });
     } catch (err) {
         next(err);
@@ -47,7 +46,6 @@ export const completeSignUp = async (req: Request, res: Response, next: NextFunc
     }
 
     try {
-        // Call the verifyOTP function and capture its response
         const otpVerificationResult = await verifyOTP(otpToken, otp);
 
         // If OTP verification was successful, proceed with account creation
@@ -72,7 +70,7 @@ export const completeSignUp = async (req: Request, res: Response, next: NextFunc
             // Publish session to RabbitMQ
             await publishToQueue("authQueue", { email:tempUser.email, token });
 
-            // Clear the tempUser once sign-up is complete
+            // Clear the tempUser when requests pushed to queue
             tempUser = null;
 
             // Respond with token and success message

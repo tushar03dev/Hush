@@ -1,50 +1,26 @@
-import express from 'express';
-import {Response} from 'express';
-import dotenv from 'dotenv';
-import connectDB from './config/db';
-import multer from 'multer';
-import {consumeFromQueue} from "./rabbitmq";
+import express from "express";
+import http from "http";
+import dotenv from "dotenv";
+import cors from "cors";
+import { Server } from "socket.io";
+import connectDB from "./config/db";
+import { setupSocket } from "./sockets/socketHandler";
+import { connectRabbitMQ } from "./config/rabbitmq";
+import authRoutes from "./routes/authRoutes";
 
 dotenv.config();
 
 const app = express();
+const server = http.createServer(app);
+const io = new Server(server, { cors: { origin: "*" } });
 
-// Middleware
 app.use(express.json());
+app.use(cors());
 
-// Middleware to handle form-data
-const upload = multer();
-app.use(upload.none());
-
-// MongoDB Connection
 connectDB();
+connectRabbitMQ();
+setupSocket(io);
 
-// Listen for incoming messages from RabbitMQ
-consumeFromQueue("chatQueue", async (msg) => {
-    console.log("Processing message from RabbitMQ:", msg);
+app.use("/api/auth", authRoutes);
 
-    // Save message to MongoDB
-    const newMessage = new Message({
-        sender: msg.senderId,
-        roomId: msg.roomId,
-        content: msg.content,
-    });
-
-    await newMessage.save();
-
-    // Emit message to all clients in the room
-    io.to(msg.roomId).emit("receiveMessage", msg);
-});
-
-//Error-handling middleware
-app.use((err: any, res: Response) => {
-    console.error(err.stack);
-    res.status(500).json({ message: 'Something went wrong!' });
-});
-
-// Start the server
-const PORT = process.env.PORT;
-
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+server.listen(5000, () => console.log("Server running on port 5000"));

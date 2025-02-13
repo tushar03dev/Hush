@@ -6,16 +6,183 @@
   <component name="ChangeListManager">
     <list default="true" id="df8e7eea-52dd-4b96-aec7-56900cc12d1a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/auth-service/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/auth-service/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/auth-service/src/config/db.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/config/db.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/auth-service/src/controllers/authController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/controllers/authController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/server.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/utils/authConsumer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/utils/authConsumer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/utils/nameGenerator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/utils/nameGenerator.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/utils/rabbitmq.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/utils/rabbitmq.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/utils/authConsumer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/consumers/authConsumer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/utils/rabbitmq.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/config/rabbitmq.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/chat-service/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/chat-service/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/config/db.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/config/db.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/controllers/chatController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/controllers/chatController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/controllers/roomController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/controllers/roomController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/middleware/authenticateToken.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/middleware/authMiddleware.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/rabbitmq.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/config/rabbitmq.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/routes/chatRoutes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/routes/chatRoutes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/.package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/asynckit/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/asynckit/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/asynckit/bench.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/asynckit/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/asynckit/lib/abort.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/asynckit/lib/async.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/asynckit/lib/defer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/asynckit/lib/iterate.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/asynckit/lib/readable_asynckit.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/asynckit/lib/readable_parallel.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/asynckit/lib/readable_serial.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/asynckit/lib/readable_serial_ordered.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/asynckit/lib/state.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/asynckit/lib/streamify.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/asynckit/lib/terminator.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/asynckit/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/asynckit/parallel.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/asynckit/serial.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/asynckit/serialOrdered.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/asynckit/stream.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/MIGRATION_GUIDE.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/SECURITY.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/dist/axios.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/dist/axios.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/dist/axios.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/dist/axios.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/dist/browser/axios.cjs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/dist/browser/axios.cjs.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/dist/esm/axios.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/dist/esm/axios.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/dist/esm/axios.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/dist/esm/axios.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/dist/node/axios.cjs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/dist/node/axios.cjs.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/index.d.cts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/adapters/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/adapters/adapters.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/adapters/fetch.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/adapters/http.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/adapters/xhr.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/axios.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/cancel/CancelToken.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/cancel/CanceledError.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/cancel/isCancel.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/core/Axios.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/core/AxiosError.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/core/AxiosHeaders.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/core/InterceptorManager.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/core/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/core/buildFullPath.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/core/dispatchRequest.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/core/mergeConfig.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/core/settle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/core/transformData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/defaults/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/defaults/transitional.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/env/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/env/classes/FormData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/env/data.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/helpers/AxiosTransformStream.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/helpers/AxiosURLSearchParams.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/helpers/HttpStatusCode.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/helpers/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/helpers/ZlibHeaderTransformStream.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/helpers/bind.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/helpers/buildURL.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/helpers/callbackify.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/helpers/combineURLs.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/helpers/composeSignals.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/helpers/cookies.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/helpers/deprecatedMethod.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/helpers/formDataToJSON.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/helpers/formDataToStream.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/helpers/fromDataURI.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/helpers/isAbsoluteURL.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/helpers/isAxiosError.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/helpers/isURLSameOrigin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/helpers/null.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/helpers/parseHeaders.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/helpers/parseProtocol.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/helpers/progressEventReducer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/helpers/readBlob.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/helpers/resolveConfig.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/helpers/speedometer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/helpers/spread.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/helpers/throttle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/helpers/toFormData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/helpers/toURLEncodedForm.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/helpers/trackStream.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/helpers/validator.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/platform/browser/classes/Blob.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/platform/browser/classes/FormData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/platform/browser/classes/URLSearchParams.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/platform/browser/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/platform/common/utils.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/platform/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/platform/node/classes/FormData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/platform/node/classes/URLSearchParams.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/platform/node/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/lib/utils.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/axios/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/combined-stream/License" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/combined-stream/Readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/combined-stream/lib/combined_stream.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/combined-stream/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/combined-stream/yarn.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/delayed-stream/.npmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/delayed-stream/License" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/delayed-stream/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/delayed-stream/Readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/delayed-stream/lib/delayed_stream.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/delayed-stream/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/dotenv/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/dotenv/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/dotenv/README-es.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/dotenv/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/dotenv/config.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/dotenv/config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/dotenv/lib/cli-options.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/dotenv/lib/env-options.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/dotenv/lib/main.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/dotenv/lib/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/dotenv/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/follow-redirects/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/follow-redirects/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/follow-redirects/debug.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/follow-redirects/http.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/follow-redirects/https.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/follow-redirects/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/follow-redirects/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/form-data/License" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/form-data/Readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/form-data/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/form-data/lib/browser.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/form-data/lib/form_data.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/form-data/lib/populate.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/form-data/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/mime-db/HISTORY.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/mime-db/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/mime-db/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/mime-db/db.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/mime-db/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/mime-db/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/mime-types/HISTORY.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/mime-types/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/mime-types/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/mime-types/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/mime-types/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/proxy-from-env/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/proxy-from-env/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/proxy-from-env/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/proxy-from-env/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/proxy-from-env/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/proxy-from-env/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/node_modules/proxy-from-env/test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/test/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/tests/auth-test.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,11 +245,11 @@
       <recent name="$PROJECT_DIR$/backend/chatService/src/models" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/backend/chat-service/src/config" />
+      <recent name="$PROJECT_DIR$/backend/chat-service/src" />
       <recent name="$PROJECT_DIR$/backend/auth-service/src/utils" />
       <recent name="$PROJECT_DIR$/backend/authService/src" />
       <recent name="$PROJECT_DIR$/backend/chatService/src/controllers" />
-      <recent name="$PROJECT_DIR$/backend/chatService/src/models" />
-      <recent name="$PROJECT_DIR$/backend/chatService/src" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -107,6 +274,9 @@
       <workItem from="1739299287026" duration="470000" />
       <workItem from="1739343483734" duration="6020000" />
       <workItem from="1739351371261" duration="7277000" />
+      <workItem from="1739374193622" duration="6676000" />
+      <workItem from="1739422263821" duration="3354000" />
+      <workItem from="1739428908294" duration="2717000" />
     </task>
     <servers />
   </component>

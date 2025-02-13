@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 import * as fs from "node:fs";
 import {encryptAudio, encryptMedia} from "../utils/avEncryption";
 import {encryptImage} from "../utils/imageEncryption";
-import {AuthRequest} from "../middleware/authenticateToken";
+import {AuthRequest} from "../middleware/authMiddleware";
 
 
 export const saveMessage = async(req: AuthRequest, res: Response, next: NextFunction):Promise<void> => {
