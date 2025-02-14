@@ -9,7 +9,7 @@ export const sendOTP = async (email: string) => {
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
     // Create a JWT containing the OTP and set its expiry
-    const token = jwt.sign({ otp }, process.env.JWT_SECRET as string, { expiresIn: '5m' });
+    const token = jwt.sign({ otp }, process.env.JWT_SECRET as string, { expiresIn: '1h' });
 
     // Send OTP via email
     await transporter.sendMail({

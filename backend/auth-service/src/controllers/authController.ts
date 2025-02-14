@@ -4,7 +4,6 @@ import jwt from 'jsonwebtoken';
 import {User} from '../models/userModel';
 import dotenv from 'dotenv';
 import {sendOTP, verifyOTP} from "./otpController";
-import {generateName} from "../utils/nameGenerator";
 import {publishToQueue} from "../config/rabbitmq";
 
 dotenv.config();
@@ -24,10 +23,7 @@ export const signUp = async (req: Request, res: Response, next: NextFunction) =>
             return res.status(400).send('User already exists.');
         }
 
-        // Temporarily store the user details (before OTP verification)
-        const name = generateName();
-        console.log(`Your new generated name: ${name}`);
-        tempUser = { name, email, password };
+        tempUser = { email, password };
 
         // Send OTP
         const otpToken = await sendOTP(email);
@@ -54,21 +50,14 @@ export const completeSignUp = async (req: Request, res: Response, next: NextFunc
                 return res.status(400).json({ message: 'No user details found for OTP verification.' });
             }
 
-            // Hash the password
-            const salt = await bcrypt.genSalt(10);
-            const hashedPassword = await bcrypt.hash(tempUser.password, salt);
-
-            // Generate the anonymous name for user
-            const name =  await generateName();
-
             // Create the new user
-            await(publishToQueue("signupQueue",{name,email:tempUser.email,hashedPassword}));
+            await(publishToQueue("signupQueue",{ email:tempUser.email, password: tempUser.password }));
 
             // Generate JWT token
             const token = jwt.sign({ email: tempUser.email }, process.env.JWT_SECRET as string, { expiresIn: "1h" });
 
             // Publish session to RabbitMQ
-            await publishToQueue("authQueue", { email:tempUser.email, token });
+            await publishToQueue("authQueue", { userId:tempUser.email, token });
 
             // Clear the tempUser when requests pushed to queue
             tempUser = null;

@@ -18,6 +18,7 @@ async function setupRabbitMQ() {
 
 export async function publishToQueue(queue: string, message: object) {
     try {
+        console.log("Publishing queue");
         if (!channel) {
             channel = await setupRabbitMQ(); // Ensure channel exists
         }
@@ -26,7 +27,7 @@ export async function publishToQueue(queue: string, message: object) {
         await channel.assertQueue(queue, { durable: true });
         channel.sendToQueue(queue, Buffer.from(JSON.stringify(message)));
 
-        console.log(`Sent message to ${queue}:`);
+        console.log(`Sent message to ${queue}:`,message);
     } catch (error) {
         console.error("RabbitMQ Publish Error for Auth Service:", error);
     }

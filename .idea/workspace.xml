@@ -6,9 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="df8e7eea-52dd-4b96-aec7-56900cc12d1a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/middleware/authMiddleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/middleware/authMiddleware.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/middleware/authMiddleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/middleware/authMiddleware.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/routes/authRoutes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/routes/authRoutes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/config/db.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/config/db.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/config/rabbitmq.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/config/rabbitmq.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/consumers/authConsumer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/consumers/authConsumer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/controllers/authController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/controllers/authController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/controllers/otpController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/controllers/otpController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/routes/otpRoutes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/routes/otpRoutes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/server.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +107,9 @@
       <workItem from="1739374193622" duration="6676000" />
       <workItem from="1739422263821" duration="3354000" />
       <workItem from="1739428908294" duration="2717000" />
-      <workItem from="1739435845139" duration="4957000" />
+      <workItem from="1739435845139" duration="6318000" />
+      <workItem from="1739443834378" duration="2052000" />
+      <workItem from="1739534772782" duration="8764000" />
     </task>
     <servers />
   </component>

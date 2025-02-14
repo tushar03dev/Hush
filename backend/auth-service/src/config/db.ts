@@ -9,9 +9,7 @@ const connectDB = async () => {
         if (!uri) {
             throw new Error('MongoDB URI is not defined in the environment variables for Auth Service');
         }
-        await mongoose.connect(uri,{
-            serverSelectionTimeoutMS: 30000,
-        });
+        await mongoose.connect(uri,{});
         console.log('MongoDB connected for Auth Service');
     } catch (error) {
         console.error('MongoDB connection error for Auth Service:', error);
