@@ -1,26 +1,19 @@
 import express from "express";
-import http from "http";
-import dotenv from "dotenv";
-import cors from "cors";
+import { createServer } from "http";
 import { Server } from "socket.io";
+import { setupSocket } from "./socketHandler";
+import { chatConsumer } from "./consumers/chatConsumer";
 import connectDB from "./config/db";
-import { setupSocket } from "./sockets/socketHandler";
-import { connectRabbitMQ } from "./config/rabbitmq";
-import authRoutes from "./routes/authRoutes";
-
-dotenv.config();
 
 const app = express();
-const server = http.createServer(app);
+const server = createServer(app);
 const io = new Server(server, { cors: { origin: "*" } });
 
-app.use(express.json());
-app.use(cors());
-
+// Setup WebSocket and RabbitMQ consumer
 connectDB();
-connectRabbitMQ();
 setupSocket(io);
+chatConsumer(io);
 
-app.use("/api/auth", authRoutes);
-
-server.listen(5000, () => console.log("Server running on port 5000"));
+server.listen(5201, () => {
+    console.log("🚀 Server running on http://localhost:5201");
+});

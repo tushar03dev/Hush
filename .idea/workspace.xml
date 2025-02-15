@@ -6,13 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="df8e7eea-52dd-4b96-aec7-56900cc12d1a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/config/db.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/config/db.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/config/rabbitmq.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/config/rabbitmq.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/consumers/authConsumer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/consumers/authConsumer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/controllers/authController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/controllers/authController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/controllers/otpController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/controllers/otpController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/routes/otpRoutes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/routes/otpRoutes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/controllers/chatController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/controllers/chatController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/controllers/roomController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/controllers/roomController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/models/chatRoomModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/models/roomModel.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/services/rabbitWorker.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/services/rabbitWorker.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +106,8 @@
       <workItem from="1739428908294" duration="2717000" />
       <workItem from="1739435845139" duration="6318000" />
       <workItem from="1739443834378" duration="2052000" />
-      <workItem from="1739534772782" duration="8764000" />
+      <workItem from="1739534772782" duration="12278000" />
+      <workItem from="1739649517870" duration="821000" />
     </task>
     <servers />
   </component>

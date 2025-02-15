@@ -1,4 +1,4 @@
-import { Room } from "../models/chatRoomModel";
+import { Room } from "../models/roomModel";
 import { connectRabbitMQ, rabbitChannel } from "../config/rabbitmq";
 
 const startWorker = async () => {

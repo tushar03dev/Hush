@@ -1,4 +1,4 @@
-import {ChatRoom} from "../models/chatRoomModel";
+import {ChatRoom} from "../models/roomModel";
 import {AuthRequest} from "../middleware/authMiddleware";
 import mongoose from "mongoose";
 
