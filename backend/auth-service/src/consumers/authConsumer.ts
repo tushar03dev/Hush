@@ -7,7 +7,7 @@ import {generateName} from "../utils/nameGenerator";
 import bcrypt from "bcryptjs";
 
 dotenv.config();
-const RABBITMQ_URL = process.env.RABBITMQ_URL || "amqp://localhost";
+const RABBITMQ_URL = process.env.RABBITMQ_URL as string;
 
 const BATCH_SIZE = 50; // Number of users processed at once
 const batch: any[] = [];

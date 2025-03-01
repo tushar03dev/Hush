@@ -1,9 +1,7 @@
 const axios = require("axios");
 const { Worker, isMainThread, parentPort, workerData } = require("worker_threads");
-require("dotenv").config();
-
-const API_URL = process.env.AUTH_URL; // Change this to your registration endpoint
-const TOTAL_REQUESTS = 5000;
+const API_URL = `http://localhost:5200/auth/sign-up`; // Change this to your registration endpoint
+const TOTAL_REQUESTS = 50;
 const THREADS = 100; // Number of parallel worker threads
 const REQUESTS_PER_THREAD = TOTAL_REQUESTS / THREADS;
 

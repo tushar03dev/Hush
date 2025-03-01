@@ -1,4 +1,4 @@
-import {ChatRoom} from "../models/roomModel";
+import {Room} from "../models/roomModel";
 import {AuthRequest} from "../middleware/authMiddleware";
 import mongoose from "mongoose";
 
@@ -9,7 +9,7 @@ export const createChatroom = async(req: AuthRequest, res: Response) => {
     const userId = req.userId as mongoose.Types.ObjectId;
 
     try{
-        const newRoom = new ChatRoom({
+        const newRoom = new Room({
             roomId: room.id,
             participants: participants,
             admins: userId,
@@ -18,6 +18,4 @@ export const createChatroom = async(req: AuthRequest, res: Response) => {
 
         await newRoom.save();
     }
-
-
 }
