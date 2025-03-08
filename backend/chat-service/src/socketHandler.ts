@@ -1,36 +1,32 @@
 import { Server, Socket } from "socket.io";
-import { publishToQueue } from "./config/rabbitmq";
+import * as http from "node:http";
 
-const connectedUsers = new Map<string, string>(); // userId -> socketId mapping
+let io: Server;
 
-export function setupSocket(io: Server) {
+export function setupSocket(server: http.Server) {
+
+    io = new Server(server, {
+        cors: {
+            origin: "*", // Allow all origins (Modify for security)
+        },
+    });
+
+
     io.on("connection", (socket: Socket) => {
         console.log("New User Connected:", socket.id);
 
-        // Register User
-        socket.on("register", (userId: string) => {
-            connectedUsers.set(userId, socket.id);
-            console.log(`User ${userId} registered with Socket ID ${socket.id}`);
+        socket.on("joinRoom", (roomId) => {
+            socket.join(roomId);
+            console.log(`[Socket.io] User joined room: ${roomId}`);
         });
 
-        // Handle chat messages
-        socket.on("send_message", async ({ senderId, receiverId, message }) => {
-            console.log(`Message from ${senderId} to ${receiverId}: ${message}`);
 
-            const chatMessage = { senderId, receiverId, message, timestamp: new Date() };
-
-            // Publish message to RabbitMQ
-            await publishToQueue("chatQueue", chatMessage);
-        });
-
-        // Handle disconnection
         socket.on("disconnect", () => {
-            connectedUsers.forEach((socketId, userId) => {
-                if (socketId === socket.id) {
-                    connectedUsers.delete(userId);
-                    console.log(`User ${userId} disconnected`);
-                }
-            });
+            console.log("[Socket.io] User disconnected:", socket.id);
         });
     });
+
+    return io;
 }
+
+export { io };

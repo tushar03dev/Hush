@@ -7,6 +7,10 @@ import { encryptMedia, encryptAudio } from "../utils/avEncryption";
 import { encryptImage } from "../utils/imageEncryption";
 import { AuthRequest } from "../middleware/authMiddleware";
 import mongoose from "mongoose";
+import {io} from "../socketHandler";
+import axios from "axios";
+
+const API_GATEWAY_URL = process.env.REACT_APP_API_GATEWAY_URL as string;
 
 export const saveMessage = async (req: AuthRequest, res: Response, next: NextFunction): Promise<void> => {
     try {
@@ -59,6 +63,12 @@ export const saveMessage = async (req: AuthRequest, res: Response, next: NextFun
             // Save Message to Database
             room.chats.push(chatMessage);
             await room.save();
+
+            // Emit Message via Socket.io (Real-time chat)
+            io.to(roomId).emit("newMessage", chatMessage);
+
+            // Send message to API Gateway for notification processing
+            await axios.post(`${API_GATEWAY_URL}/process-message`, chatMessage);
 
             // Publish Message to RabbitMQ (chatQueue)
             await publishToQueue("chatQueue", chatMessage);
