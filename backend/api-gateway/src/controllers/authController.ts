@@ -21,3 +21,13 @@ export async function signUpRequestToAuthService(message: any) {
         return { success: false, error: "Chat Service unavailable" };
     }
 }
+
+export async function otpVerificationRequestToAuthService(message: any) {
+    try {
+        const response = await axios.post(`${AUTH_SERVICE_URL}/auth/verify`, message);
+        return response.data;
+    } catch (error) {
+        console.error("[API Gateway] Failed to reach Chat Service:", error);
+        return { success: false, error: "Chat Service unavailable" };
+    }
+}

@@ -1,9 +1,10 @@
 import express, { Request, Response } from "express";
 import {sendMessageToChatService} from "../controllers/chatController";
+import {authenticateToken} from "../middleware/authMiddleware";
 
 const router = express.Router();
 
-router.post("/send", async (req: Request, res: Response) => {
+router.post("/send",authenticateToken, async (req: Request, res: Response) => {
     try {
         const { roomId, timestamps, type, data } = req.body;
 
