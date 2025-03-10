@@ -1,9 +1,9 @@
-import { Server, Socket } from "socket.io";
+import {DefaultEventsMap, Server, Socket} from "socket.io";
 import * as http from "node:http";
 
 let io: Server;
 
-export function setupSocket(server: http.Server) {
+export function setupSocket(server: Server<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>) {
 
     io = new Server(server, {
         cors: {

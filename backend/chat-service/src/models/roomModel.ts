@@ -1,7 +1,8 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
 export interface IRoom extends Document {
-    name: string;
+    name?: string;
+    isGroup: boolean;
     members: mongoose.Types.ObjectId[];
     admins: mongoose.Types.ObjectId[];
     chats: {
@@ -16,7 +17,8 @@ export interface IRoom extends Document {
 }
 
 const RoomSchema = new Schema<IRoom>({
-    name: { type: String, required: true },
+    name: { type: String, required: function() { return this.isGroup; } },
+    isGroup: { type: Boolean, required: true },
     members: [{ type: Schema.Types.ObjectId, ref: 'User', required: true }],
     admins: [{ type: Schema.Types.ObjectId, ref: 'User', required: true }],
     chats: [
@@ -28,8 +30,10 @@ const RoomSchema = new Schema<IRoom>({
             encryptedContent: { type: Schema.Types.Mixed, required: true },
             iv: { type: String, required: true },
             tag: { type: String }, //  authentication tag for AES-GCM
-        },
+        }
     ],
 });
 
 export const Room = mongoose.model<IRoom>('ChatRoom', RoomSchema);
+
+

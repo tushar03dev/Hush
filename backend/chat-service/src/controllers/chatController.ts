@@ -10,7 +10,7 @@ import mongoose from "mongoose";
 import {io} from "../socketHandler";
 import axios from "axios";
 
-const API_GATEWAY_URL = process.env.REACT_APP_API_GATEWAY_URL as string;
+const API_GATEWAY_URL = process.env.API_GATEWAY_URL as string;
 
 export const saveMessage = async (req: AuthRequest, res: Response, next: NextFunction): Promise<void> => {
     try {
@@ -60,18 +60,15 @@ export const saveMessage = async (req: AuthRequest, res: Response, next: NextFun
                 ...(type !== "text" ? { tag: (encryptionResult as { encryptedData: string; iv: string; tag: string }).tag } : {}),
             };
 
-            // Save Message to Database
-            room.chats.push(chatMessage);
-            await room.save();
+            // Save Message to Database ->
+            // Publish Message to RabbitMQ (chatQueue)
+            await publishToQueue("chatQueue", chatMessage);
 
             // Emit Message via Socket.io (Real-time chat)
             io.to(roomId).emit("newMessage", chatMessage);
 
             // Send message to API Gateway for notification processing
             await axios.post(`${API_GATEWAY_URL}/process-message`, chatMessage);
-
-            // Publish Message to RabbitMQ (chatQueue)
-            await publishToQueue("chatQueue", chatMessage);
 
             // Send Response
             res.status(200).json({ message: `${type.charAt(0).toUpperCase() + type.slice(1)} message saved & queued!` });

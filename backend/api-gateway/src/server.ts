@@ -1,7 +1,10 @@
 import express from 'express';
 import {Response} from 'express';
+import authRoutes from './routes/authRoutes';
 import dotenv from 'dotenv';
+import connectDB from './config/db';
 import multer from 'multer';
+import otpRoutes from "./routes/otpRoutes";
 
 dotenv.config(); // Load environment variables from .env file
 
@@ -15,6 +18,15 @@ const upload = multer(); // You can configure multer to store files if needed
 
 // Middleware to parse form-data
 app.use(upload.none()); // This is used when you're not uploading any files, just data
+
+// MongoDB Connection
+connectDB();
+
+// Use the auth routes
+app.use('/api/auth', authRoutes); // Mounts the auth routes
+
+// Use the auth routes
+app.use('/otp',otpRoutes); // Mounts the auth routes
 
 //Error-handling middleware
 app.use((err: any, res: Response) => {

@@ -4,7 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df8e7eea-52dd-4b96-aec7-56900cc12d1a" name="Changes" comment="" />
+    <list default="true" id="df8e7eea-52dd-4b96-aec7-56900cc12d1a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/config/rabbitmq.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/config/rabbitmq.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/consumers/chatConsumer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/consumers/chatConsumer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/controllers/chatController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/controllers/chatController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/controllers/roomController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/controllers/roomController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/models/roomModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/models/roomModel.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/routes/chatRoutes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/routes/chatRoutes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/services/rabbitWorker.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/socketHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/socketHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/gateway/apigateway.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/rabbitmq/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/rabbitmq/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/rabbitmq/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/rabbitmq/src/config/queues.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/rabbitmq/src/config/rabbitmq.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/rabbitmq/src/server.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/rabbitmq/tsconfig.json" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -53,7 +72,7 @@
     "git-widget-placeholder": "main",
     "javascript.nodejs.core.library.configured.version": "18.19.1",
     "javascript.nodejs.core.library.typings.version": "18.19.75",
-    "last_opened_file_path": "/home/tushar/Documents/Connectify",
+    "last_opened_file_path": "/home/tushar/Documents/Projects/Hush/backend/apigateway/src/config",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -65,11 +84,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/backend/apigateway/src/config" />
       <recent name="$PROJECT_DIR$/backend" />
       <recent name="$PROJECT_DIR$/backend/auth-service/src/config" />
       <recent name="$PROJECT_DIR$/backend/rabbitmq" />
       <recent name="$PROJECT_DIR$/backend/chatService/src" />
-      <recent name="$PROJECT_DIR$/backend/chatService/src/models" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/backend/rabbitmq/config" />
@@ -82,7 +101,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-WS-243.23654.157" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-WS-243.25659.40" />
       </set>
     </attachedChunks>
   </component>
@@ -117,6 +136,7 @@
       <workItem from="1740469651274" duration="5000" />
       <workItem from="1740852907859" duration="261000" />
       <workItem from="1740853396455" duration="896000" />
+      <workItem from="1741616298665" duration="10654000" />
     </task>
     <servers />
   </component>
@@ -129,6 +149,11 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/backend/authService/src/routes/otpRoutes.ts</url>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/backend/api-gateway/src/config/rabbitmq.ts</url>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
