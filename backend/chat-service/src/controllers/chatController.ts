@@ -1,18 +1,17 @@
-import { Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
 import fs from "fs";
 import { Room } from "../models/roomModel";
 import { publishToQueue } from "../config/rabbitmq"; // RabbitMQ publisher
 import { encryptText } from "../utils/textEncryption";
 import { encryptMedia, encryptAudio } from "../utils/avEncryption";
 import { encryptImage } from "../utils/imageEncryption";
-import { AuthRequest } from "../middleware/authMiddleware";
 import mongoose from "mongoose";
 import {io} from "../socketHandler";
 import axios from "axios";
 
 const API_GATEWAY_URL = process.env.API_GATEWAY_URL as string;
 
-export const saveMessage = async (req: AuthRequest, res: Response, next: NextFunction): Promise<void> => {
+export const saveMessage = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const { roomId, timestamps, type, data } = req.body;
 
@@ -79,3 +78,4 @@ export const saveMessage = async (req: AuthRequest, res: Response, next: NextFun
         next(error);
     }
 };
+

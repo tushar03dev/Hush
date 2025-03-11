@@ -55,3 +55,5 @@ router.post("/verify",authenticateToken, async (req, res) => {
         res.status(500).json({ success: false, error: "Internal Server Error" });
     }
 });
+
+export default router;

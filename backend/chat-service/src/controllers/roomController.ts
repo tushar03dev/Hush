@@ -1,10 +1,9 @@
 import {Room} from "../models/roomModel";
-import {AuthRequest} from "../middleware/authMiddleware";
-import {Response, NextFunction} from "express";
+import {Request, Response, NextFunction} from "express";
 
-export const createChatroom = async(req: AuthRequest, res: Response, next: NextFunction):Promise<void> => {
+export const createChatroom = async(req: Request, res: Response, next: NextFunction):Promise<void> => {
     try{
-        const {name, participants} = req.body;
+        const {name, participants, userId} = req.body;
 
         if(!name) {
             res.status(400).json({error: "All fields are required"});
@@ -15,8 +14,6 @@ export const createChatroom = async(req: AuthRequest, res: Response, next: NextF
             res.status(400).json({error: "At least two participants are required"});
             return;
         }
-
-        const userId = req.userId as string;
 
         const newRoom = new Room({
             name:name,
@@ -32,30 +29,57 @@ export const createChatroom = async(req: AuthRequest, res: Response, next: NextF
     }
 };
 
-export const removeUser = async (req: AuthRequest, res: Response, next: NextFunction):Promise<void> => {
+export const removeUser = async (req: Request, res: Response, next: NextFunction):Promise<void> => {
+    const{room,participantId} = req.body;
+    if(!participantId) {
+        res.status(400).json({error: "Participant ID is required"});
+        return;
+    }
     try{
-        const {participantId,roomId} = req.body;
+        room.update({$pull: { members: participantId }});
+        res.status(201).json({msg:"Successfully member kicked-out the room"});
+    } catch(error){
+        next(error);
+    }
+}
 
-        if(!participantId) {
-            res.status(400).json({error: "participant ID is required"});
-            return;
-        }
+export const addUser = async(req: Request, res: Response, next: NextFunction):Promise<void> => {
+    const{room,participantId} = req.body;
+    if(!participantId) {
+        res.status(400).json({error: "Participant ID is required"});
+        return;
+    }
+    try{
+        room.update({$push: { members: participantId }});
+        res.status(201).json({msg:"Successfully member inserted the room"});
+    } catch(error){
+        next(error);
+    }
+}
 
-        const room = await Room.findById(roomId);
+export const addAdmin = async(req: Request, res: Response, next: NextFunction):Promise<void> => {
+    const{room,participantId} = req.body;
+    if(!participantId) {
+        res.status(400).json({error: "Participant ID is required"});
+        return;
+    }
+    try{
+        room.update({$push: { admins: participantId }});
+        res.status(201).json({msg:"Successfully member inserted the room"});
+    } catch(error){
+        next(error);
+    }
+}
 
-        if(!room) {
-            res.status(400).json({error: "Room does not exist"});
-            return;
-        }
-        if(!room.members.includes(participantId)) {
-            res.status(400).json({error: "Member does not exist in this group"});
-            return;
-        }
-
-        await Room.findByIdAndUpdate(roomId,
-            { $pull: { members: participantId } },
-            { new: true}
-        );
+export const removeAdmin = async(req: Request, res: Response, next: NextFunction):Promise<void> => {
+    const{room,participantId} = req.body;
+    if(!participantId) {
+        res.status(400).json({error: "Participant ID is required"});
+        return;
+    }
+    try{
+        room.update({$pull: { admins: participantId }});
+        res.status(201).json({msg:"Successfully removed from admin status"});
     } catch(error){
         next(error);
     }

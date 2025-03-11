@@ -6,9 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="df8e7eea-52dd-4b96-aec7-56900cc12d1a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/api-gateway/src/controllers/authController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api-gateway/src/controllers/authController.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/api-gateway/src/routes/authRoutes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api-gateway/src/routes/authRoutes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/middleware/authMiddleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api-gateway/src/middleware/authMiddleware.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/api-gateway/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api-gateway/src/server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/controllers/chatController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/controllers/chatController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/controllers/roomController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/controllers/roomController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/middleware/authMiddleware.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/routes/authRoutes.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/routes/chatRoutes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/routes/chatRoutes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/notification-service/test.ts" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,24 +56,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Node.js.encryptDecrypt.ts.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "javascript.nodejs.core.library.configured.version": "18.19.1",
-    "javascript.nodejs.core.library.typings.version": "18.19.75",
-    "last_opened_file_path": "/home/tushar/Documents/Projects/Hush/backend/api-gateway/src",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "/home/tushar/Documents/Projects/Hush/frontend/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Node.js.encryptDecrypt.ts.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;18.19.1&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;18.19.75&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/tushar/Documents/Projects/Hush/backend/api-gateway/src&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/tushar/Documents/Projects/Hush/frontend/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/backend/api-gateway/src" />
@@ -122,7 +128,8 @@
       <workItem from="1740469651274" duration="5000" />
       <workItem from="1740852907859" duration="261000" />
       <workItem from="1740853396455" duration="896000" />
-      <workItem from="1741616298665" duration="11703000" />
+      <workItem from="1741616298665" duration="12495000" />
+      <workItem from="1741669620036" duration="3672000" />
     </task>
     <servers />
   </component>
@@ -138,7 +145,6 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/backend/api-gateway/src/config/rabbitmq.ts</url>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
