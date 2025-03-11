@@ -4,8 +4,8 @@ export interface IRoom extends Document {
     name?: string;
     isGroup: boolean;
     members: mongoose.Types.ObjectId[];
-    admins: mongoose.Types.ObjectId[];
-    chats: {
+    admins?: mongoose.Types.ObjectId[];
+    chats?: {
         roomId: mongoose.Types.ObjectId;
         timestamps: Date;
         sender: mongoose.Types.ObjectId;

@@ -43,7 +43,10 @@ export const removeUser = async (req: Request, res: Response, next: NextFunction
         return;
     }
     try{
-        room.update({$pull: { members: participantId }});
+        await room.update({$pull: { members: participantId }});
+        await User.findByIdAndUpdate(participantId, {
+            $pull: {rooms: room._id}
+        })
         res.status(201).json({msg:"Successfully member kicked-out the room"});
     } catch(error){
         next(error);
@@ -57,7 +60,10 @@ export const addUser = async(req: Request, res: Response, next: NextFunction):Pr
         return;
     }
     try{
-        room.update({$push: { members: participantId }});
+        await room.update({$push: { members: participantId }});
+        await User.findByIdAndUpdate(participantId, {
+            $push: {rooms: room._id}
+        })
         res.status(201).json({msg:"Successfully member inserted the room"});
     } catch(error){
         next(error);

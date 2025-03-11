@@ -13,21 +13,38 @@ const API_GATEWAY_URL = process.env.API_GATEWAY_URL as string;
 
 export const saveMessage = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-        const { roomId, timestamps, type, data } = req.body;
+        const { receiverId, roomId, timestamps, type, data } = req.body;
 
         if (!data) {
             res.status(400).send("No message found!");
             return;
         }
 
-        // Validate Room
-        const room = await Room.findById(roomId);
-        if (!room) {
-            res.status(404).send("No room found!");
-            return;
+        let room;
+
+        // **🔹 Handle First DM Message: Check if DM Room Exists or Create One**
+        if (!roomId && receiverId) {
+            room = await Room.findOne({
+                members: { $all: [req.user?._id, receiverId] },
+                isGroup: false
+            });
+
+            if (!room) {
+                room = new Room({
+                    members: [req.user?._id, receiverId],
+                    isGroup: false
+                });
+                await room.save();
+            }
+        } else {
+            room = await Room.findById(roomId);
+            if (!room) {
+                res.status(404).send("No room found!");
+                return;
+            }
         }
 
-        // Validate Sender (Check if user is part of the room)
+        // **🔹 Validate Sender (Ensure user is part of the chat)**
         if (!room.members.includes(req.user?._id as mongoose.Types.ObjectId)) {
             res.status(403).send("You don't have access to this chat!");
             return;
