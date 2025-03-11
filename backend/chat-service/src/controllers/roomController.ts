@@ -1,5 +1,6 @@
 import {Room} from "../models/roomModel";
 import {Request, Response, NextFunction} from "express";
+import {User} from "../models/userModel";
 
 export const createChatroom = async(req: Request, res: Response, next: NextFunction):Promise<void> => {
     try{
@@ -22,7 +23,13 @@ export const createChatroom = async(req: Request, res: Response, next: NextFunct
             admins: [userId],
         });
 
-        await newRoom.save();
+        const room = await newRoom.save();
+
+        for (const participant in participants) {
+            await User.findByIdAndUpdate(participant, {
+                $push: {rooms: room._id}
+            });
+        }
         res.status(201).json(newRoom);
     } catch (error) {
         next(error);

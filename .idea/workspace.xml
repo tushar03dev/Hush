@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df8e7eea-52dd-4b96-aec7-56900cc12d1a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/api-gateway/src/controllers/chatController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api-gateway/src/controllers/chatController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/api-gateway/src/routes/chatRoutes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api-gateway/src/routes/chatRoutes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/routes/chatRoutes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/routes/chatRoutes.ts" afterDir="false" />
-    </list>
+    <list default="true" id="df8e7eea-52dd-4b96-aec7-56900cc12d1a" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -123,7 +118,7 @@
       <workItem from="1740852907859" duration="261000" />
       <workItem from="1740853396455" duration="896000" />
       <workItem from="1741616298665" duration="12495000" />
-      <workItem from="1741669620036" duration="4786000" />
+      <workItem from="1741669620036" duration="5302000" />
     </task>
     <servers />
   </component>
