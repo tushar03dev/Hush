@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import fs from "fs";
-import { Room } from "../models/roomModel";
+import { IRoom,Room } from "../models/roomModel";
 import { publishToQueue } from "../config/rabbitmq"; // RabbitMQ publisher
 import { encryptText } from "../utils/textEncryption";
 import { encryptMedia, encryptAudio } from "../utils/avEncryption";
@@ -8,6 +8,7 @@ import { encryptImage } from "../utils/imageEncryption";
 import mongoose from "mongoose";
 import {io} from "../socketHandler";
 import axios from "axios";
+import {User} from "../models/userModel";
 
 const API_GATEWAY_URL = process.env.API_GATEWAY_URL as string;
 
@@ -96,3 +97,37 @@ export const saveMessage = async (req: Request, res: Response, next: NextFunctio
     }
 };
 
+export const getChatMessages = async(req: Request, res: Response, next: NextFunction):Promise<void> => {
+    const {userId,roomId,limit,skip} = req.body;
+    if(!userId) {
+        res.status(400).json({error: "User ID is required"});
+    }
+    if(!roomId) {
+        res.status(400).json({error: "Room ID is required"});
+    }
+    const LIMIT = parseInt(limit);
+    const SKIP = parseInt(skip);
+    try{
+        const room = await Room.findById(roomId).populate("chats");
+        if (!room) {
+            res.status(400).json({error: "Room not found"});
+            return;
+        }
+        if(!room.members.includes(userId)) {
+            res.status(400).json({error: "User does not belong to this group"});
+            return;
+        }
+        const chats = await Room.aggregate([
+            { $match: { _id: room._id } },
+            { $unwind: "$chats" },
+            { $sort: { "chats.timestamps": -1 } }, // Sort by latest messages
+            { $skip: SKIP },
+            { $limit: LIMIT }
+        ]);
+
+        res.status(200).json({ chats, hasMore: chats.length === LIMIT });
+
+    } catch (error) {
+        next(error);
+    }
+}

@@ -6,8 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="df8e7eea-52dd-4b96-aec7-56900cc12d1a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/consumers/authConsumer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/consumers/authConsumer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/controllers/authController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/controllers/authController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/models/userModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/models/userModel.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/controllers/chatController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/controllers/chatController.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/chat-service/src/controllers/roomController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/controllers/roomController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/models/roomModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/models/roomModel.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/models/userModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/models/userModel.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/index.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,23 +64,24 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;18.19.1&quot;,
     &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;18.19.75&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/tushar/Documents/Projects/Hush/backend/api-gateway/src&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/tushar/Documents/Projects/Hush/backend/auth-service/src/utils&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;ts.external.directory.path&quot;: &quot;/home/tushar/Documents/Projects/Hush/frontend/node_modules/typescript/lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/backend/auth-service/src/utils" />
       <recent name="$PROJECT_DIR$/backend/api-gateway/src" />
       <recent name="$PROJECT_DIR$/backend/apigateway/src/config" />
       <recent name="$PROJECT_DIR$/backend" />
       <recent name="$PROJECT_DIR$/backend/auth-service/src/config" />
-      <recent name="$PROJECT_DIR$/backend/rabbitmq" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/backend/api-gateway/src" />
@@ -122,7 +130,10 @@
       <workItem from="1740852907859" duration="261000" />
       <workItem from="1740853396455" duration="896000" />
       <workItem from="1741616298665" duration="12495000" />
-      <workItem from="1741669620036" duration="6236000" />
+      <workItem from="1741669620036" duration="10700000" />
+      <workItem from="1741753168973" duration="1743000" />
+      <workItem from="1741761596336" duration="2798000" />
+      <workItem from="1741769140827" duration="5686000" />
     </task>
     <servers />
   </component>
