@@ -2,9 +2,9 @@ import { Request, Response, NextFunction } from "express";
 import fs from "fs";
 import { IRoom,Room } from "../models/roomModel";
 import { publishToQueue } from "../config/rabbitmq"; // RabbitMQ publisher
-import { encryptText } from "../utils/textEncryption";
-import { encryptMedia, encryptAudio } from "../utils/avEncryption";
-import { encryptImage } from "../utils/imageEncryption";
+import {decryptText, encryptText} from "../utils/textEncryption";
+import {encryptMedia, encryptAudio, decryptAudio, decryptMedia} from "../utils/avEncryption";
+import {decryptImage, encryptImage} from "../utils/imageEncryption";
 import mongoose from "mongoose";
 import {io} from "../socketHandler";
 import axios from "axios";
@@ -125,7 +125,34 @@ export const getChatMessages = async(req: Request, res: Response, next: NextFunc
             { $limit: LIMIT }
         ]);
 
-        res.status(200).json({ chats, hasMore: chats.length === LIMIT });
+        const decryptedChats = chats.map(chat => {
+            try {
+                let decryptedContent;
+                switch (chat.chats.dataType) {
+                    case "text":
+                        decryptedContent = decryptText(chat.chats.encryptedContent, chat.chats.iv);
+                        break;
+                    case "image":
+                        decryptedContent = decryptImage(chat.chats.encryptedContent, chat.chats.iv, chat.chats.tag);
+                        break;
+                    case "audio":
+                        decryptedContent = decryptAudio(chat.chats.encryptedContent, chat.chats.iv, chat.chats.tag);
+                        break;
+                    case "video":
+                        decryptedContent = decryptMedia(chat.chats.encryptedContent, chat.chats.iv, chat.chats.tag);
+                        break;
+                    default:
+                        decryptedContent = chat.chats.encryptedContent;
+                }
+
+                return { ...chat.chats, decryptedContent }; // Attach decrypted content
+            } catch (error) {
+                console.error("Decryption failed:", error);
+                return { ...chat.chats, decryptedContent: "Decryption failed" };
+            }
+        });
+
+        res.status(200).json({ chats: decryptedChats, hasMore: decryptedChats.length === LIMIT });
 
     } catch (error) {
         next(error);
