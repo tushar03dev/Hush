@@ -7,6 +7,12 @@
     <list default="true" id="df8e7eea-52dd-4b96-aec7-56900cc12d1a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/chat-service/src/controllers/chatController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/controllers/chatController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/controllers/roomController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/controllers/roomController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/models/roomModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/models/roomModel.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/routes/chatRoutes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/routes/chatRoutes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/notification-service/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/notification-service/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/notification-service/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/notification-service/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/notification-service/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/notification-service/src/server.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +131,8 @@
       <workItem from="1741669620036" duration="10700000" />
       <workItem from="1741753168973" duration="1743000" />
       <workItem from="1741761596336" duration="2798000" />
-      <workItem from="1741769140827" duration="6317000" />
+      <workItem from="1741769140827" duration="6641000" />
+      <workItem from="1741800496702" duration="2999000" />
     </task>
     <servers />
   </component>

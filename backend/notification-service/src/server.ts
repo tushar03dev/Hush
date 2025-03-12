@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import connectDB from './config/db';
 import multer from 'multer';
 import otpRoutes from "./routes/otpRoutes";
+import cors from 'cors';
 
 dotenv.config(); // Load environment variables from .env file
 

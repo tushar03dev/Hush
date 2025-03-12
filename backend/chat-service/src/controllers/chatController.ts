@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import fs from "fs";
-import { IRoom,Room } from "../models/roomModel";
+import { Room } from "../models/roomModel";
 import { publishToQueue } from "../config/rabbitmq"; // RabbitMQ publisher
 import {decryptText, encryptText} from "../utils/textEncryption";
 import {encryptMedia, encryptAudio, decryptAudio, decryptMedia} from "../utils/avEncryption";
@@ -8,7 +8,6 @@ import {decryptImage, encryptImage} from "../utils/imageEncryption";
 import mongoose from "mongoose";
 import {io} from "../socketHandler";
 import axios from "axios";
-import {User} from "../models/userModel";
 
 const API_GATEWAY_URL = process.env.API_GATEWAY_URL as string;
 
@@ -154,6 +153,29 @@ export const getChatMessages = async(req: Request, res: Response, next: NextFunc
 
         res.status(200).json({ chats: decryptedChats, hasMore: decryptedChats.length === LIMIT });
 
+    } catch (error) {
+        next(error);
+    }
+}
+
+export const readMessage = async(req: Request, res: Response, next: NextFunction):Promise<void> => {
+    const { userId, roomId, messageIds } = req.body;
+
+    if (!userId || !roomId || !messageIds || !Array.isArray(messageIds)) {
+        res.status(400).json({ error: "User ID, Room ID, and message IDs are required" });
+        return;
+    }
+
+    try {
+        await Room.updateOne(
+            { _id: roomId },
+            {
+                $addToSet: { "chats.$[chat].readBy": userId } // Add userId to readBy array
+            },
+            { arrayFilters: [{ "chat._id": { $in: messageIds }, "chat.readBy": { $ne: userId } }] } // Only update unread messages
+        );
+
+        res.status(200).json({ message: "Messages marked as read" });
     } catch (error) {
         next(error);
     }

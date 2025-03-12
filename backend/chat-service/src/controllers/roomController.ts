@@ -2,6 +2,7 @@ import {Room} from "../models/roomModel";
 import {Request, Response, NextFunction} from "express";
 import {User} from "../models/userModel";
 
+
 export const createChatroom = async(req: Request, res: Response, next: NextFunction):Promise<void> => {
     try{
         const {name, participants, userId} = req.body;
