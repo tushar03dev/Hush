@@ -1,5 +1,6 @@
 import axios from "axios";
-
+import dotenv from "dotenv";
+dotenv.config();
 const CHAT_SERVICE_URL = process.env.CHAT_SERVICE_URL as string;
 
 export async function sendMessageToChatService(message: any) {

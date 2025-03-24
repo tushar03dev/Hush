@@ -11,7 +11,7 @@ dotenv.config();
 let tempUser: any; // Temporary storage for user details
 
 export const signUp = async (req: Request, res: Response, next: NextFunction) => {
-    const { email, password, photo} = req.body;
+    const {email, password, photo} = req.body;
     // Check if all required fields are present
     if (!email || !password) {
         return res.status(400).json({ message: 'email and password are required.' });
@@ -27,7 +27,7 @@ export const signUp = async (req: Request, res: Response, next: NextFunction) =>
 
         // Send OTP
         const otpToken = await sendOTP(email);
-        return res.status(200).json({ otpToken, message: 'OTP sent to your email. Please enter the OTP to complete sign-up.' });
+        return res.status(200).json({success: true, otpToken, message: 'OTP sent to your email. Please enter the OTP to complete sign-up.' });
     } catch (err) {
         next(err);
     }
@@ -63,7 +63,7 @@ export const completeSignUp = async (req: Request, res: Response, next: NextFunc
             tempUser = null;
 
             // Respond with token and success message
-            res.status(201).json({ token, message: 'User signed up successfully.' });
+            res.status(201).json({success: true, token, message: 'User signed up successfully.' });
         } else {
             // OTP verification failed
             res.status(400).json({ message: otpVerificationResult.message });
@@ -94,7 +94,7 @@ export const signIn = async (req: Request, res: Response, next: NextFunction) =>
         // Publish Session to RabbitMQ queue
         await publishToQueue("authQueue", { userId: email, token });
 
-        res.json({ token });
+        res.json({success: true, token });
         return;
     } catch (err) {
         next(err);

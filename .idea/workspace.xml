@@ -7,7 +7,8 @@
     <list default="true" id="df8e7eea-52dd-4b96-aec7-56900cc12d1a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/api-gateway/src/controllers/authController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api-gateway/src/controllers/authController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/api-gateway/src/routes/authRoutes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api-gateway/src/routes/authRoutes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/api-gateway/src/controllers/chatController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api-gateway/src/controllers/chatController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/controllers/authController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/controllers/authController.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,7 +144,7 @@
       <workItem from="1742791938643" duration="40000" />
       <workItem from="1742792189347" duration="385000" />
       <workItem from="1742796402822" duration="2003000" />
-      <workItem from="1742839249476" duration="1092000" />
+      <workItem from="1742839249476" duration="2289000" />
     </task>
     <servers />
   </component>

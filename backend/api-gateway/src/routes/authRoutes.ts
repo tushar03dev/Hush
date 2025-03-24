@@ -14,7 +14,7 @@ router.post("/sign-in", async (req, res) => {
         const response = await signInRequestToAuthService({email, password});
 
         if (response.success) {
-            res.status(200).json({ success: true, message: "Message processed successfully." });
+            res.status(200).json(response);
         } else {
             res.status(500).json({ success: false, error: "Failed to send message." });
         }
@@ -32,7 +32,7 @@ router.post("/sign-up", async (req, res) => {
         const response = await signUpRequestToAuthService({name, email, password});
 
         if (response.success) {
-            res.status(200).json({ success: true, message: "Message processed successfully." });
+            res.status(200).json(response);
         } else {
             res.status(500).json({ success: false, error: "Failed to send message." });
         }
@@ -50,7 +50,7 @@ router.post("/verify",async (req, res) => {
         const response = await otpVerificationRequestToAuthService({otpToken, otp});
 
         if (response.success) {
-            res.status(200).json({ success: true, message: "Message processed successfully." });
+            res.status(200).json(response);
         } else {
             res.status(500).json({ success: false, error: "Failed to send message." });
         }
