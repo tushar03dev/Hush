@@ -1,6 +1,7 @@
 import {Room} from "../models/roomModel";
 import {Request, Response, NextFunction} from "express";
 import {User} from "../models/userModel";
+import {decryptText} from "../utils/textEncryption";
 
 
 export const createChatroom = async(req: Request, res: Response, next: NextFunction):Promise<void> => {
@@ -147,7 +148,19 @@ export const getRooms = async (req: Request, res: Response, next: NextFunction):
                 isGroup: 1,
                 membersData: 1,
                 adminsData: 1,
-                latestChat: 1 // Only return the latest chat
+                latestChat: {
+                    $cond: {
+                        if: {$eq: ["latestChat.dataType", "text"]},
+                        then: {
+                            $function: {
+                                body: decryptText, // Call decryption function
+                                args: ["$latestChat.encryptedContent", "$latestChat.iv", "$latestChat.tag"],
+                                lang: "js"
+                            }
+                        },
+                        else: "$latestChat.dataType"
+                    }
+                }
             }
         }
     ]);

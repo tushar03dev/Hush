@@ -6,13 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="df8e7eea-52dd-4b96-aec7-56900cc12d1a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/controllers/chatController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/controllers/chatController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/api-gateway/src/routes/chatRoutes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api-gateway/src/routes/chatRoutes.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/chat-service/src/controllers/roomController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/controllers/roomController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/models/roomModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/models/roomModel.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/middleware/adminCheck.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/middleware/adminCheck.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/chat-service/src/routes/chatRoutes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/routes/chatRoutes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/notification-service/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/notification-service/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/notification-service/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/notification-service/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/notification-service/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/notification-service/src/server.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +89,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-WS-243.25659.40" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-WS-243.26053.12" />
       </set>
     </attachedChunks>
   </component>
@@ -132,7 +129,21 @@
       <workItem from="1741753168973" duration="1743000" />
       <workItem from="1741761596336" duration="2798000" />
       <workItem from="1741769140827" duration="6641000" />
-      <workItem from="1741800496702" duration="2999000" />
+      <workItem from="1741800496702" duration="3418000" />
+      <workItem from="1741840049865" duration="2400000" />
+      <workItem from="1741927227100" duration="43000" />
+      <workItem from="1741927282624" duration="2000" />
+      <workItem from="1741970433250" duration="809000" />
+      <workItem from="1742104554265" duration="3302000" />
+      <workItem from="1742183660593" duration="2605000" />
+      <workItem from="1742197948823" duration="132000" />
+      <workItem from="1742368271756" duration="29000" />
+      <workItem from="1742493375778" duration="61000" />
+      <workItem from="1742654957913" duration="18000" />
+      <workItem from="1742654987459" duration="533000" />
+      <workItem from="1742791938643" duration="40000" />
+      <workItem from="1742792189347" duration="385000" />
+      <workItem from="1742796402822" duration="2003000" />
     </task>
     <servers />
   </component>

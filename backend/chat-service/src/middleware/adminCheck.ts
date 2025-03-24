@@ -13,6 +13,10 @@ export const checkAdmin = async(req:Request,res:Response,next: NextFunction):Pro
             res.status(404).json({error:"Room not found"});
             return;
         }
+        if(!room.admins){
+            res.status(404).json({error:"No Admins found"});
+            return;
+        }
         if(!room.admins.includes(userId)){
             res.status(404).json({error:"Doesn\'t have admin rights"});
             return;

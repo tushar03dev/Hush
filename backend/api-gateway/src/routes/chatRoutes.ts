@@ -38,7 +38,7 @@ router.post("/add-user",authenticateToken, async (req: Request, res: Response) =
     }
 });
 
-router.post("/add-user",authenticateToken, async (req: Request, res: Response) => {
+router.post("/remove-user",authenticateToken, async (req: Request, res: Response) => {
     try {
         // Forward the request to the Chat Service
         const response = await removeUser(req.body);
