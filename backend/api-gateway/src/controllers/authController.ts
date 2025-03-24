@@ -7,8 +7,8 @@ export async function signInRequestToAuthService(message: any) {
         const response = await axios.post(`${AUTH_SERVICE_URL}/auth/sign-in`, message);
         return response.data;
     } catch (error) {
-        console.error("[API Gateway] Failed to reach Chat Service:", error);
-        return { success: false, error: "Chat Service unavailable" };
+        console.error("[API Gateway] Failed to reach Auth Service:", error);
+        return { success: false, error: "Auth Service unavailable" };
     }
 }
 
