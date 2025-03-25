@@ -1,16 +1,14 @@
-import {DefaultEventsMap, Server, Socket} from "socket.io";
-import * as http from "node:http";
+import { Server as SocketIOServer, Socket } from "socket.io";
+import * as http from "http";
 
-let io: Server;
+let io: SocketIOServer;
 
-export function setupSocket(server: Server<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>) {
-
-    io = new Server(server, {
+export function setupSocket(server: http.Server) {
+    io = new SocketIOServer(server, {
         cors: {
-            origin: "*", // Allow all origins (Modify for security)
+            origin: "*",
         },
     });
-
 
     io.on("connection", (socket: Socket) => {
         console.log("New User Connected:", socket.id);
@@ -19,7 +17,6 @@ export function setupSocket(server: Server<DefaultEventsMap, DefaultEventsMap, D
             socket.join(roomId);
             console.log(`[Socket.io] User joined room: ${roomId}`);
         });
-
 
         socket.on("disconnect", () => {
             console.log("[Socket.io] User disconnected:", socket.id);

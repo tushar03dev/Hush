@@ -1,34 +1,34 @@
 import express from "express";
 import { createServer } from "http";
-import { Server } from "socket.io";
+import { Server as SocketIOServer } from "socket.io";
 import { setupSocket } from "./socketHandler";
 import connectDB from "./config/db";
 import chatRoutes from "./routes/chatRoutes";
 import dotenv from "dotenv";
-import {checkAdmin} from "./middleware/adminCheck";
+import { checkAdmin } from "./middleware/adminCheck";
 import multer from "multer";
 
 dotenv.config();
 const app = express();
-const server = createServer(app);
-const io = new Server(server, { cors: { origin: "*" } });
+const server = createServer(app); // Create an HTTP server
+
+// Pass the HTTP server to Socket.io
+const io = new SocketIOServer(server, { cors: { origin: "*" } });
 
 // Setup WebSocket and RabbitMQ consumer
 connectDB();
-setupSocket(io);
+setupSocket(server); // ✅ Pass `server` instead of `io`
 
 // Middleware
-app.use(express.json()); // Parses incoming requests with JSON payloads
+app.use(express.json());
 
 // Middleware to handle form-data
-const upload = multer(); // You can configure multer to store files if needed
+const upload = multer();
+app.use(upload.none());
 
-// Middleware to parse form-data
-app.use(upload.none()); // This is used when you're not uploading any files, just data
-
-app.use('/admin',checkAdmin);
-app.use('/chat',chatRoutes);
+app.use('/admin', checkAdmin);
+app.use('/chat', chatRoutes);
 
 server.listen(process.env.PORT, () => {
-    console.log(`Chat Server running on http://localhost:${ process.env.PORT }`);
+    console.log(`Chat Server running on http://localhost:${process.env.PORT}`);
 });

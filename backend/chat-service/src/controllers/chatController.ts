@@ -30,7 +30,7 @@ export const saveMessage = async (req: Request, res: Response, next: NextFunctio
         }
         const userId = user._id; // Mongo ID
 
-        const { receiverId, roomId, timestamps, type, data } = req.body;
+        const { receiverId, roomId, type, data } = req.body;
 
         if (!data) {
             res.status(400).send("No message found!");
@@ -85,7 +85,7 @@ export const saveMessage = async (req: Request, res: Response, next: NextFunctio
             // Construct Message Object
             const chatMessage = {
                 roomId: room._id as mongoose.Types.ObjectId,
-                timestamps,
+                timestamps: Date.now(),
                 sender: userId as mongoose.Types.ObjectId,
                 dataType: type,
                 encryptedContent: encryptionResult.encryptedData,
@@ -101,7 +101,7 @@ export const saveMessage = async (req: Request, res: Response, next: NextFunctio
             io.to(roomId).emit("newMessage", chatMessage);
 
             // Send message to API Gateway for notification processing
-            await axios.post(`${API_GATEWAY_URL}/process-message`, chatMessage);
+            //await axios.post(`${API_GATEWAY_URL}/process-message`, chatMessage);
 
             // Send Response
             res.status(200).json({ message: `${type.charAt(0).toUpperCase() + type.slice(1)} message saved & queued!` });
