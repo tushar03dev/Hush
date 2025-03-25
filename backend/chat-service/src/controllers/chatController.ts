@@ -8,11 +8,28 @@ import {decryptImage, encryptImage} from "../utils/imageEncryption";
 import mongoose from "mongoose";
 import {io} from "../socketHandler";
 import axios from "axios";
+import {User} from "../models/userModel";
 
 const API_GATEWAY_URL = process.env.API_GATEWAY_URL as string;
 
 export const saveMessage = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
+
+        // Extract user email from headers
+        const userEmail = req.headers["user-id"];
+        if (!userEmail || typeof userEmail !== "string") {
+            res.status(400).send({ success: false, error: "Unauthorized: Email not provided." });
+            return;
+        }
+
+        // Fetch the user ID from the database using email
+        const user = await User.findOne({ email: userEmail });
+        if (!user) {
+            res.status(404).send({ success: false, error: "User not found." });
+            return;
+        }
+        const userId = user._id; // Mongo ID
+
         const { receiverId, roomId, timestamps, type, data } = req.body;
 
         if (!data) {
@@ -25,13 +42,13 @@ export const saveMessage = async (req: Request, res: Response, next: NextFunctio
         // **🔹 Handle First DM Message: Check if DM Room Exists or Create One**
         if (!roomId && receiverId) {
             room = await Room.findOne({
-                members: { $all: [req.user?._id, receiverId] },
+                members: { $all: [userId, receiverId] },
                 isGroup: false
             });
 
             if (!room) {
                 room = new Room({
-                    members: [req.user?._id, receiverId],
+                    members: [userId, receiverId],
                     isGroup: false
                 });
                 await room.save();
@@ -45,7 +62,7 @@ export const saveMessage = async (req: Request, res: Response, next: NextFunctio
         }
 
         // **🔹 Validate Sender (Ensure user is part of the chat)**
-        if (!room.members.includes(req.user?._id as mongoose.Types.ObjectId)) {
+        if (!room.members.includes(userId as mongoose.Types.ObjectId)) {
             res.status(403).send("You don't have access to this chat!");
             return;
         }
@@ -69,7 +86,7 @@ export const saveMessage = async (req: Request, res: Response, next: NextFunctio
             const chatMessage = {
                 roomId: room._id as mongoose.Types.ObjectId,
                 timestamps,
-                sender: req.user?._id as mongoose.Types.ObjectId,
+                sender: userId as mongoose.Types.ObjectId,
                 dataType: type,
                 encryptedContent: encryptionResult.encryptedData,
                 iv: encryptionResult.iv,

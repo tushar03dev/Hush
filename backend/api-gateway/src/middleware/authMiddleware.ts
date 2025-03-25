@@ -1,27 +1,30 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import {IUser, User} from '../models/userModel';
+import { IUser, User } from '../models/userModel';
 
 dotenv.config();
 
-// Extend Express Request type to include `userId`
+// Extend Express Request type to include `user`
 export interface AuthRequest extends Request {
-    userId?: string;
+    user?: {
+        userId?: string;
+    };
 }
 
-export const authenticateToken = async (req: AuthRequest, res: Response, next: NextFunction):Promise<void> => {
-    const token = req.headers['authorization'];
-
-    // Check if token is missing
-    if (!token) {
+export const authenticateToken = async (req: AuthRequest, res: Response, next: NextFunction): Promise<void> => {
+    const authHeader = req.headers['authorization'];
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
         res.status(401).json({ message: 'Access denied. No token provided.' });
         return;
     }
 
+    const token = authHeader.split(" ")[1];
+
     try {
         // Verify the token using the secret
-        const decoded = jwt.verify(token, process.env.JWT_SECRET!) as {email: string};
+        const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as jwt.JwtPayload;
+
         if (!decoded.email) {
             res.status(400).json({ message: "Invalid token: No email found" });
             return;
@@ -34,15 +37,15 @@ export const authenticateToken = async (req: AuthRequest, res: Response, next: N
             return;
         }
 
-        req.userId = decoded.email;
-        res.json({ userId: req.userId });
+        req.user = { ...user, userId: decoded.email };
+        next();
     } catch (err) {
         const error = err as Error;
         if (error.name === 'TokenExpiredError') {
             res.status(403).json({ message: 'Token expired.' });
+            return;
         }
-
-        console.error('Token verification error:', error);  // Log the error for debugging
+        console.error('Token verification error:', error);
         res.status(403).json({ message: 'Invalid token.' });
     }
 };

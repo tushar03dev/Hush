@@ -25,7 +25,7 @@ export async function signUpRequestToAuthService(message: any) {
 
 export async function otpVerificationRequestToAuthService(message: any) {
     try {
-        const response = await axios.post(`${AUTH_SERVICE_URL}/auth/verify`, message);
+        const response = await axios.post(`${AUTH_SERVICE_URL}/otp/verify`, message);
         return response.data;
     } catch (error) {
         console.error("[API Gateway] Failed to reach Auth Service for otp verification:", error);

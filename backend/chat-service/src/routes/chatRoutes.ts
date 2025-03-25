@@ -4,10 +4,6 @@ import {createChatroom, getRooms} from "../controllers/roomController";
 
 const router = Router();
 
-// Save Message
-router.post('/save-message',(req: Request, res: Response, next: NextFunction) => {
-    saveMessage(req,res,next);
-});
 
 // Save Message
 router.post('/save-message',saveMessage);

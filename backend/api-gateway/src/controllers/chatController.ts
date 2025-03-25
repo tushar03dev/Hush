@@ -1,15 +1,20 @@
 import axios from "axios";
 import dotenv from "dotenv";
+import {IUser} from "../models/userModel";
 dotenv.config();
 const CHAT_SERVICE_URL = process.env.CHAT_SERVICE_URL as string;
 
-export async function sendMessageToChatService(message: any) {
+export async function sendMessageToChatService(message: any, userId: string): Promise<void> {
     try {
-        const response = await axios.post(`${CHAT_SERVICE_URL}/chat/save-message`, message);
+        const response = await axios.post(`${CHAT_SERVICE_URL}/chat/save-message`, message,{
+            headers: {
+                "user-id": userId // Pass userId in headers
+            }
+        });
         return response.data;
     } catch (error) {
         console.error("[API Gateway] Failed to reach Chat Service:", error);
-        return { success: false, error: "Chat Service unavailable" };
+        return;
     }
 }
 
