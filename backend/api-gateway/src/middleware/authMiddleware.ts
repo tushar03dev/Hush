@@ -30,14 +30,7 @@ export const authenticateToken = async (req: AuthRequest, res: Response, next: N
             return;
         }
 
-        // Find the user by email
-        const user: IUser | null = await User.findOne({ email: decoded.email });
-        if (!user) {
-            res.status(404).json({ message: "User not found" });
-            return;
-        }
-
-        req.user = { ...user, userId: decoded.email };
+        req.user = { userId: decoded.email };
         next();
     } catch (err) {
         const error = err as Error;

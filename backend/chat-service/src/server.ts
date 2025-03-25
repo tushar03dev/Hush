@@ -7,6 +7,7 @@ import chatRoutes from "./routes/chatRoutes";
 import dotenv from "dotenv";
 import { checkAdmin } from "./middleware/adminCheck";
 import multer from "multer";
+import {chatConsumer} from "./consumers/chatConsumer";
 
 dotenv.config();
 const app = express();
@@ -16,7 +17,7 @@ const server = createServer(app); // Create an HTTP server
 const io = new SocketIOServer(server, { cors: { origin: "*" } });
 
 // Setup WebSocket and RabbitMQ consumer
-connectDB();
+connectDB().then(() => chatConsumer());
 setupSocket(server); // ✅ Pass `server` instead of `io`
 
 // Middleware

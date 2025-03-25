@@ -22,20 +22,29 @@ export const saveMessage = async (req: Request, res: Response, next: NextFunctio
             return;
         }
 
-        // Fetch the user ID from the database using email
+        // Fetch sender (user) ID from the database using email
         const user = await User.findOne({ email: userEmail });
         if (!user) {
             res.status(404).send({ success: false, error: "User not found." });
             return;
         }
-        const userId = user._id; // Mongo ID
 
-        const { receiverId, roomId, type, data } = req.body;
+        const userId = user._id; // MongoDB ID of sender
+
+        const { receiverId: receiverEmail, roomId, type, data } = req.body;
 
         if (!data) {
             res.status(400).send("No message found!");
             return;
         }
+
+        // Fetch receiver ID using email
+        const receiver = await User.findOne({ email: receiverEmail });
+        if (!receiver) {
+            res.status(404).send({ success: false, error: "Receiver not found." });
+            return;
+        }
+        const receiverId = receiver._id; // MongoDB ID of receiver
 
         let room;
 
@@ -92,7 +101,7 @@ export const saveMessage = async (req: Request, res: Response, next: NextFunctio
                 iv: encryptionResult.iv,
                 ...(type !== "text" ? { tag: (encryptionResult as { encryptedData: string; iv: string; tag: string }).tag } : {}),
             };
-
+            console.log(chatMessage);
             // Save Message to Database ->
             // Publish Message to RabbitMQ (chatQueue)
             await publishToQueue("chatQueue", chatMessage);
@@ -104,7 +113,7 @@ export const saveMessage = async (req: Request, res: Response, next: NextFunctio
             //await axios.post(`${API_GATEWAY_URL}/process-message`, chatMessage);
 
             // Send Response
-            res.status(200).json({ message: `${type.charAt(0).toUpperCase() + type.slice(1)} message saved & queued!` });
+            res.status(200).json({ success: true, message: `${type.charAt(0).toUpperCase() + type.slice(1)} message saved & queued!` });
         } else {
             res.status(400).send("Invalid message type!");
         }
@@ -168,7 +177,7 @@ export const getChatMessages = async(req: Request, res: Response, next: NextFunc
             }
         });
 
-        res.status(200).json({ chats: decryptedChats, hasMore: decryptedChats.length === LIMIT });
+        res.status(200).json({ success: true,chats: decryptedChats, hasMore: decryptedChats.length === LIMIT });
 
     } catch (error) {
         next(error);
@@ -192,7 +201,7 @@ export const readMessage = async(req: Request, res: Response, next: NextFunction
             { arrayFilters: [{ "chat._id": { $in: messageIds }, "chat.readBy": { $ne: userId } }] } // Only update unread messages
         );
 
-        res.status(200).json({ message: "Messages marked as read" });
+        res.status(200).json({ success: true,message: "Messages marked as read" });
     } catch (error) {
         next(error);
     }

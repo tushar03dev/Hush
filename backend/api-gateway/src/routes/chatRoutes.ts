@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.post("/send",authenticateToken, async (req: AuthRequest, res: Response): Promise<void> => {
     try {
+        //console.log("hello");
         const { receiverId, roomId, type, data } = req.body;
         // check if user is defined
         if (!req.user) {
@@ -22,7 +23,6 @@ router.post("/send",authenticateToken, async (req: AuthRequest, res: Response): 
 
         // Forward the request to the Chat Service
         const response = await sendMessageToChatService({ receiverId,roomId, type, data },userId) as any;
-
         if (response.success) {
             res.status(200).json({ success: true, message: response });
         } else {
