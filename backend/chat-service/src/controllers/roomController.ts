@@ -103,15 +103,17 @@ export const removeAdmin = async(req: Request, res: Response, next: NextFunction
 
 export const getRooms = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-        const { userId } = req.body;
-        if (!userId) {
-            res.status(400).json({ message: "User ID is required!" });
+        // Extract user email from headers
+        const userEmail = req.headers["user-id"];
+        if (!userEmail || typeof userEmail !== "string") {
+            res.status(400).send({success: false, error: "Unauthorized: Email not provided."});
             return;
         }
 
-        const user = await User.findById(userId).lean();
+        // Fetch sender (user) ID from the database using email
+        const user = await User.findOne({email: userEmail});
         if (!user) {
-            res.status(404).json({ message: "User not found" });
+            res.status(404).send({success: false, error: "User not found."});
             return;
         }
 
@@ -188,7 +190,7 @@ export const getRooms = async (req: Request, res: Response, next: NextFunction):
             }
         ]);
 
-        res.json(rooms);
+        res.status(200).json(rooms);
     } catch (error) {
         next(error);
     }
