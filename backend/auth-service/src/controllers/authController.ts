@@ -54,7 +54,7 @@ export const completeSignUp = async (req: Request, res: Response, next: NextFunc
             await(publishToQueue("signupQueue",{ email:tempUser.email, password: tempUser.password }));
 
             // Generate JWT token
-            const token = jwt.sign({ email: tempUser.email }, process.env.JWT_SECRET as string, { expiresIn: "1h" });
+            const token = jwt.sign({ email: tempUser.email }, process.env.JWT_SECRET as string, { expiresIn: "1d" });
 
             // Publish session to RabbitMQ
             await publishToQueue("authQueue", { userId:tempUser.email, token });
@@ -89,7 +89,7 @@ export const signIn = async (req: Request, res: Response, next: NextFunction) =>
             return;
         }
 
-        const token = jwt.sign({ email:email }, process.env.JWT_SECRET as string, { expiresIn: '1h' });
+        const token = jwt.sign({ email:email }, process.env.JWT_SECRET as string, { expiresIn: '1d' });
 
         // Publish Session to RabbitMQ queue
         await publishToQueue("authQueue", { userId: email, token });

@@ -102,69 +102,73 @@ export const removeAdmin = async(req: Request, res: Response, next: NextFunction
 
 
 export const getRooms = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    const {userId} = req.body;
-    if (!userId) {
-        res.status(404).send("User ID is required!");
-        return;
-    }
-    const user = await User.findById(userId).populate('rooms').lean();
-    if (!user) {
-        res.status(404).json({ message: "User not found" });
-        return;
-    }
-    if (!user.rooms || user.rooms.length === 0) {
-        res.status(404).json({ message: "User has no rooms" });
-        return;
-    }
+    try {
+        const {userId} = req.body;
+        if (!userId) {
+            res.status(404).send("User ID is required!");
+            return;
+        }
+        const user = await User.findById(userId).populate('rooms').lean();
+        if (!user) {
+            res.status(404).json({message: "User not found"});
+            return;
+        }
+        if (!user.rooms || user.rooms.length === 0) {
+            res.status(404).json({message: "User has no rooms"});
+            return;
+        }
 
-    // Fetch rooms where the user is a member, sorted by most recent chat
-    const rooms = await Room.aggregate([
-        { $match: { _id: { $in: user.rooms } } }, // Match rooms where user is a member
-        {
-            $addFields: {
-                latestChat: { $arrayElemAt: [ "$chats", -1 ] } // Get the most recent chat message
-            }
-        },
-        { $sort: { "latestChat.timestamps": -1 } }, // Sort rooms by latest chat
-        {
-            $lookup: {
-                from: "users",
-                localField: "members",
-                foreignField: "_id",
-                as: "membersData"
-            }
-        },
-        {
-            $lookup: {
-                from: "users",
-                localField: "admins",
-                foreignField: "_id",
-                as: "adminsData"
-            }
-        },
-        {
-            $project: {
-                name: 1,
-                isGroup: 1,
-                membersData: 1,
-                adminsData: 1,
-                latestChat: {
-                    $cond: {
-                        if: {$eq: ["latestChat.dataType", "text"]},
-                        then: {
-                            $function: {
-                                body: decryptText, // Call decryption function
-                                args: ["$latestChat.encryptedContent", "$latestChat.iv", "$latestChat.tag"],
-                                lang: "js"
-                            }
-                        },
-                        else: "$latestChat.dataType"
+        // Fetch rooms where the user is a member, sorted by most recent chat
+        const rooms = await Room.aggregate([
+            {$match: {_id: {$in: user.rooms}}}, // Match rooms where user is a member
+            {
+                $addFields: {
+                    latestChat: {$arrayElemAt: ["$chats", -1]} // Get the most recent chat message
+                }
+            },
+            {$sort: {"latestChat.timestamps": -1}}, // Sort rooms by latest chat
+            {
+                $lookup: {
+                    from: "users",
+                    localField: "members",
+                    foreignField: "_id",
+                    as: "membersData"
+                }
+            },
+            {
+                $lookup: {
+                    from: "users",
+                    localField: "admins",
+                    foreignField: "_id",
+                    as: "adminsData"
+                }
+            },
+            {
+                $project: {
+                    name: 1,
+                    isGroup: 1,
+                    membersData: 1,
+                    adminsData: 1,
+                    latestChat: {
+                        $cond: {
+                            if: {$eq: ["latestChat.dataType", "text"]},
+                            then: {
+                                $function: {
+                                    body: decryptText, // Call decryption function
+                                    args: ["$latestChat.encryptedContent", "$latestChat.iv", "$latestChat.tag"],
+                                    lang: "js"
+                                }
+                            },
+                            else: "$latestChat.dataType"
+                        }
                     }
                 }
             }
-        }
-    ]);
+        ]);
 
-    res.json(rooms);
+        res.json(rooms);
+    } catch (error){
+        next(error);
+    }
 }
 
