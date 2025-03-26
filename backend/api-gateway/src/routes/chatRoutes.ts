@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import {
     addAdmin,
-    addUser,
+    addUser, createRoom,
     getChat, getRooms,
     removeAdmin,
     removeUser,
@@ -40,6 +40,36 @@ router.post("/send",authenticateToken, async (req: AuthRequest, res: Response): 
         res.status(500).json({ success: false, error: "Internal Server Error" });
     }
 });
+
+router.post("/create-room",authenticateToken, async (req: AuthRequest, res: Response): Promise<void> => {
+    try {
+        const { name, participants } = req.body;
+        // check if user is defined
+        if (!req.user) {
+            res.status(401).json({ success: false, error: "Unauthorized: User not found in token." });
+            return;
+        }
+        const userId = req.user.userId;
+
+        // check if UserId exists
+        if (!userId) {
+            res.status(401).json({ success: false, error: "User not found" });
+            return;
+        }
+
+        // Forward the request to the Chat Service
+        const response = await createRoom({ name,participants },userId) as any;
+        if (response.success) {
+            res.status(200).json({ success: true, message: response });
+        } else {
+            res.status(500).json({ success: false, error: "Failed to send message." });
+        }
+    } catch (error) {
+        console.error("[API Gateway] Error:", error);
+        res.status(500).json({ success: false, error: "Internal Server Error" });
+    }
+});
+
 
 router.post("/get-chat",authenticateToken, async (req: AuthRequest, res: Response) => {
     try {

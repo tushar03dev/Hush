@@ -13,7 +13,7 @@ export async function sendMessageToChatService(message: any, userId: string): Pr
         });
         return response.data;
     } catch (error) {
-        console.error("[API Gateway] Failed to reach Chat Service:", error);
+        console.error("[API Gateway] Failed to reach Chat Service for sending message:", error);
         return;
     }
 }
@@ -27,10 +27,26 @@ export async function getChat(message: any, userId: string): Promise<void> {
         });
         return response.data;
     } catch (error) {
-        console.error("[API Gateway] Failed to reach Chat Service:", error);
+        console.error("[API Gateway] Failed to reach Chat Service for retrieving chat:", error);
         return;
     }
 }
+
+export async function createRoom(message: any, userId: string): Promise<void> {
+    try{
+        const response = await axios.post(`${CHAT_SERVICE_URL}/chat/create-room`,message,{
+            headers: {
+                "user-id": userId // Pass userId in headers
+            }
+        });
+        return response.data;
+    }catch(error){
+        console.error("[API Gateway] Failed to reach Chat Service for creating room:", error);
+        return;
+    }
+}
+
+
 
 export async function getRooms( userId: string): Promise<void> {
     try {
@@ -41,7 +57,7 @@ export async function getRooms( userId: string): Promise<void> {
         });
         return response.data;
     } catch (error) {
-        console.error("[API Gateway] Failed to reach Chat Service:", error);
+        console.error("[API Gateway] Failed to reach Chat Service for retrieving rooms:", error);
         return;
     }
 }
@@ -52,7 +68,7 @@ export async function addUser(message: any) {
         const response = await axios.post(`${CHAT_SERVICE_URL}/admin/add-user`, message);
         return response.data;
     } catch (error) {
-        console.error("[API Gateway] Failed to reach Chat Service:", error);
+        console.error("[API Gateway] Failed to reach Chat Service for adding user:", error);
         return { success: false, error: "Chat Service unavailable" };
     }
 }
@@ -62,7 +78,7 @@ export async function removeUser(message: any) {
         const response = await axios.post(`${CHAT_SERVICE_URL}/admin/remove-user`, message);
         return response.data;
     } catch (error) {
-        console.error("[API Gateway] Failed to reach Chat Service:", error);
+        console.error("[API Gateway] Failed to reach Chat Service for removing user:", error);
         return { success: false, error: "Chat Service unavailable" };
     }
 }
@@ -72,7 +88,7 @@ export async function addAdmin(message: any) {
         const response = await axios.post(`${CHAT_SERVICE_URL}/admin/add-admin`, message);
         return response.data;
     } catch (error) {
-        console.error("[API Gateway] Failed to reach Chat Service:", error);
+        console.error("[API Gateway] Failed to reach Chat Service for adding admin:", error);
         return { success: false, error: "Chat Service unavailable" };
     }
 }
@@ -82,7 +98,7 @@ export async function removeAdmin(message: any) {
         const response = await axios.post(`${CHAT_SERVICE_URL}/admin/remove-admin`, message);
         return response.data;
     } catch (error) {
-        console.error("[API Gateway] Failed to reach Chat Service:", error);
+        console.error("[API Gateway] Failed to reach Chat Service for removing admin:", error);
         return { success: false, error: "Chat Service unavailable" };
     }
 }

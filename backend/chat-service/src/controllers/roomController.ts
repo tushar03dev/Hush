@@ -2,41 +2,73 @@ import {Room} from "../models/roomModel";
 import {Request, Response, NextFunction} from "express";
 import {User} from "../models/userModel";
 import {decryptText} from "../utils/textEncryption";
+import mongoose from "mongoose";
 
 
 export const createChatroom = async(req: Request, res: Response, next: NextFunction):Promise<void> => {
-    try{
-        const {name, participants, userId} = req.body;
-
-        if(!name) {
-            res.status(400).json({error: "All fields are required"});
+    try {
+        // Extract user email from headers
+        const userEmail = req.headers["user-id"];
+        if (!userEmail || typeof userEmail !== "string") {
+            res.status(400).send({ success: false, error: "Unauthorized: Email not provided." });
             return;
         }
 
-        if(participants.length < 2) {
-            res.status(400).json({error: "At least two participants are required"});
+        // Fetch sender (user) ID from the database using email
+        const user = await User.findOne({ email: userEmail });
+        if (!user) {
+            res.status(404).send({ success: false, error: "User not found." });
+            return;
+        }
+
+        const userId = user._id; // MongoDB ID of sender
+        let { name, participants } = req.body;
+
+        if (!name || !Array.isArray(participants)) {
+            res.status(400).json({ error: "Invalid input: name and participants are required" });
+            return;
+        }
+
+        if (participants.length < 2) {
+            res.status(400).json({ error: "At least two participants are required" });
+            return;
+        }
+
+        // Correctly extract user IDs
+        const userIds = (await Promise.all(
+            participants.map(async (participant: string) => {
+                const foundUser = await User.findOne({ email: participant }, { _id: 1 });
+                return foundUser ? foundUser._id : null;
+            })
+        )).filter(id => id !== null);
+
+        if (userIds.length !== participants.length) {
+            res.status(400).json({ success: false, error: "One or more users not found" });
             return;
         }
 
         const newRoom = new Room({
-            name:name,
-            isGroup:true,
-            members: participants,
+            name: name,
+            isGroup: true,
+            members: userIds,
             admins: [userId],
         });
 
         const room = await newRoom.save();
 
-        for (const participant in participants) {
-            await User.findByIdAndUpdate(participant, {
-                $push: {rooms: room._id}
+        // Correct iteration using `for...of`
+        for (const memberId of userIds) {
+            await User.findByIdAndUpdate(memberId, {
+                $push: { rooms: room._id }
             });
         }
-        res.status(201).json(newRoom);
+
+        res.status(201).json({ success: true, newRoom });
     } catch (error) {
         next(error);
     }
 };
+
 
 export const removeUser = async (req: Request, res: Response, next: NextFunction):Promise<void> => {
     const{room,participantId} = req.body;
@@ -178,7 +210,7 @@ export const getRooms = async (req: Request, res: Response, next: NextFunction):
             }
         ]);
 
-// **Decrypt after fetching**
+       // Decrypt after fetching
         rooms.forEach((room) => {
             if (room.latestChat?.dataType === "text") {
                 room.latestChat.decryptedContent = decryptText(
