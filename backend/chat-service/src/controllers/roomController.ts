@@ -124,13 +124,13 @@ export const getRooms = async (req: Request, res: Response, next: NextFunction):
 
         // Fetch rooms where the user is a member, sorted by most recent chat
         const rooms = await Room.aggregate([
-            { $match: { _id: { $in: user.rooms } } }, // Match rooms where user is a member
+            { $match: { _id: { $in: user.rooms } } },
             {
                 $addFields: {
-                    latestChat: { $arrayElemAt: ["$chats", -1] } // Get the most recent chat message
+                    latestChat: { $arrayElemAt: ["$chats", -1] } // Get latest chat message
                 }
             },
-            { $sort: { "latestChat.timestamps": -1 } }, // Sort rooms by latest chat
+            { $sort: { "latestChat.timestamps": -1 } }, // Sort by latest chat time
             {
                 $lookup: {
                     from: "users",
@@ -173,24 +173,23 @@ export const getRooms = async (req: Request, res: Response, next: NextFunction):
                             }
                         }
                     },
-                    latestChat: {
-                        $cond: {
-                            if: { $eq: ["$latestChat.dataType", "text"] },
-                            then: {
-                                $function: {
-                                    body: decryptText, // Call decryption function
-                                    args: ["$latestChat.encryptedContent", "$latestChat.iv", "$latestChat.tag"],
-                                    lang: "js"
-                                }
-                            },
-                            else: "$latestChat.dataType"
-                        }
-                    }
+                    latestChat: 1 // Keep encrypted content as is for now
                 }
             }
         ]);
 
-        res.status(200).json(rooms);
+// **Decrypt after fetching**
+        rooms.forEach((room) => {
+            if (room.latestChat?.dataType === "text") {
+                room.latestChat.decryptedContent = decryptText(
+                    room.latestChat.encryptedContent,
+                    room.latestChat.iv,
+                );
+            }
+        });
+
+
+        res.status(200).json({success:true,rooms});
     } catch (error) {
         next(error);
     }

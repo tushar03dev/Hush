@@ -51,7 +51,7 @@ export const saveMessage = async (req: Request, res: Response, next: NextFunctio
         // **🔹 Handle First DM Message: Check if DM Room Exists or Create One**
         if (!roomId && receiverId) {
             room = await Room.findOne({
-                members: {$all: [userId, receiverId]},
+                members: { $all: [userId, receiverId] },
                 isGroup: false
             });
 
@@ -61,6 +61,12 @@ export const saveMessage = async (req: Request, res: Response, next: NextFunctio
                     isGroup: false
                 });
                 await room.save();
+
+                // **Update both users to include the new room ID**
+                await User.updateMany(
+                    { _id: { $in: [userId, receiverId] } },
+                    { $addToSet: { rooms: room._id } } // Ensures no duplicate room IDs
+                );
             }
         } else {
             room = await Room.findById(roomId);
@@ -69,6 +75,7 @@ export const saveMessage = async (req: Request, res: Response, next: NextFunctio
                 return;
             }
         }
+
 
         // **🔹 Validate Sender (Ensure user is part of the chat)**
         if (!room.members.includes(userId as mongoose.Types.ObjectId)) {

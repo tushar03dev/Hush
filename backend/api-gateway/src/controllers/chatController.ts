@@ -32,6 +32,19 @@ export async function getChat(message: any, userId: string): Promise<void> {
     }
 }
 
+export async function getRooms( userId: string): Promise<void> {
+    try {
+        const response = await axios.post(`${CHAT_SERVICE_URL}/chat/get-rooms`,{},{
+            headers: {
+                "user-id": userId // Pass userId in headers
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error("[API Gateway] Failed to reach Chat Service:", error);
+        return;
+    }
+}
 
 
 export async function addUser(message: any) {

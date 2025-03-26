@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import {
     addAdmin,
     addUser,
-    getChat,
+    getChat, getRooms,
     removeAdmin,
     removeUser,
     sendMessageToChatService
@@ -73,7 +73,6 @@ router.post("/get-chat",authenticateToken, async (req: AuthRequest, res: Respons
 
 router.post("/get-rooms",authenticateToken, async (req: AuthRequest, res: Response) => {
     try {
-        const { roomId, limit, skip } = req.body;
         // check if user is defined
         if (!req.user) {
             res.status(401).json({ success: false, error: "Unauthorized: User not found in token." });
@@ -88,7 +87,7 @@ router.post("/get-rooms",authenticateToken, async (req: AuthRequest, res: Respon
         }
 
         // Forward the request to the Chat Service
-        const response = await getChat({ roomId, limit, skip },userId) as any;
+        const response = await getRooms(userId) as any;
 
         if (response.success) {
             res.status(200).json({ success: true, message: response});
