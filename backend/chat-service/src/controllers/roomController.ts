@@ -69,7 +69,6 @@ export const createChatroom = async(req: Request, res: Response, next: NextFunct
     }
 };
 
-
 export const removeUser = async (req: Request, res: Response, next: NextFunction):Promise<void> => {
     const{room,participantId} = req.body;
     if(!participantId) {
