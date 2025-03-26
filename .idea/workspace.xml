@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df8e7eea-52dd-4b96-aec7-56900cc12d1a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/chat-service/src/controllers/roomController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/controllers/roomController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/middleware/adminCheck.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/middleware/adminCheck.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,7 +149,7 @@
       <workItem from="1742964200434" duration="5829000" />
       <workItem from="1742971110339" duration="1019000" />
       <workItem from="1742982381020" duration="2864000" />
-      <workItem from="1743001076660" duration="795000" />
+      <workItem from="1743001076660" duration="1631000" />
     </task>
     <servers />
   </component>

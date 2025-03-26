@@ -70,16 +70,20 @@ export const createChatroom = async(req: Request, res: Response, next: NextFunct
 };
 
 export const removeUser = async (req: Request, res: Response, next: NextFunction):Promise<void> => {
-    const{room,participantId} = req.body;
-    if(!participantId) {
+    const{room,participant} = req.body;
+    if(!participant) {
         res.status(400).json({error: "Participant ID is required"});
         return;
     }
     try{
-        await room.update({$pull: { members: participantId }});
-        await User.findByIdAndUpdate(participantId, {
-            $pull: {rooms: room._id}
-        })
+        const user = await User.findOne({email:participant});
+        if (!user) {
+            res.status(404).send({ success: false, error: "User not found." });
+            return;
+        }
+        const participantId = user._id;
+        await Room.findByIdAndUpdate(room._id,{$pull: { members: participantId }});
+        await User.findByIdAndUpdate(user._id,{$pull: { rooms: room._id }});
         res.status(201).json({msg:"Successfully member kicked-out the room"});
     } catch(error){
         next(error);
@@ -87,13 +91,20 @@ export const removeUser = async (req: Request, res: Response, next: NextFunction
 }
 
 export const addUser = async(req: Request, res: Response, next: NextFunction):Promise<void> => {
-    const{room,participantId} = req.body;
-    if(!participantId) {
+    const{room,participant} = req.body;
+    if(!participant) {
         res.status(400).json({error: "Participant ID is required"});
         return;
     }
     try{
-        await room.update({$push: { members: participantId }});
+        const user = await User.findOne({email:participant});
+        if (!user) {
+            res.status(404).send({ success: false, error: "User not found." });
+            return;
+        }
+        const participantId = user._id;
+
+        await Room.findByIdAndUpdate(room._id,{$push: { members: participantId }});
         await User.findByIdAndUpdate(participantId, {
             $push: {rooms: room._id}
         })
@@ -104,13 +115,19 @@ export const addUser = async(req: Request, res: Response, next: NextFunction):Pr
 }
 
 export const addAdmin = async(req: Request, res: Response, next: NextFunction):Promise<void> => {
-    const{room,participantId} = req.body;
-    if(!participantId) {
+    const{room,participant} = req.body;
+    if(!participant) {
         res.status(400).json({error: "Participant ID is required"});
         return;
     }
     try{
-        room.update({$push: { admins: participantId }});
+        const user = await User.findOne({email:participant});
+        if (!user) {
+            res.status(404).send({ success: false, error: "User not found." });
+            return;
+        }
+        const participantId = user._id;
+        Room.findByIdAndUpdate(room._id,{$push: { admins: participantId }});
         res.status(201).json({msg:"Successfully member inserted the room"});
     } catch(error){
         next(error);
@@ -118,13 +135,19 @@ export const addAdmin = async(req: Request, res: Response, next: NextFunction):P
 }
 
 export const removeAdmin = async(req: Request, res: Response, next: NextFunction):Promise<void> => {
-    const{room,participantId} = req.body;
-    if(!participantId) {
+    const{room,participant} = req.body;
+    if(!participant) {
         res.status(400).json({error: "Participant ID is required"});
         return;
     }
     try{
-        room.update({$pull: { admins: participantId }});
+        const user = await User.findOne({email:participant});
+        if (!user) {
+            res.status(404).send({ success: false, error: "User not found." });
+            return;
+        }
+        const participantId = user._id;
+        Room.findByIdAndUpdate(room._id,{$pull: { admins: participantId }});
         res.status(201).json({msg:"Successfully removed from admin status"});
     } catch(error){
         next(error);

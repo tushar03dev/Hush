@@ -13,7 +13,7 @@ const router = express.Router();
 
 router.post("/send",authenticateToken, async (req: AuthRequest, res: Response): Promise<void> => {
     try {
-        //console.log("hello");
+
         const { receiverId, roomId, type, data } = req.body;
         // check if user is defined
         if (!req.user) {
