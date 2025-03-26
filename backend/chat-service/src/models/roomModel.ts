@@ -23,7 +23,7 @@ const RoomSchema = new Schema<IRoom>({
     members: [{ type: Schema.Types.ObjectId, ref: 'User', required: true }],
     admins: [{ type: Schema.Types.ObjectId, ref: 'User', required: true }],
     chats: [
-        {   messageId: {type: Schema.Types.ObjectId, auto: true},
+        {
             timestamps: { type: Date, default: Date.now },
             sender: { type: Schema.Types.ObjectId, ref: 'User', required: true },
             dataType: { type: String, enum: ['video','audio', 'text', 'image'], required: true },

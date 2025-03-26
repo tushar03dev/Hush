@@ -103,30 +103,32 @@ export const removeAdmin = async(req: Request, res: Response, next: NextFunction
 
 export const getRooms = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-        const {userId} = req.body;
+        const { userId } = req.body;
         if (!userId) {
-            res.status(404).send("User ID is required!");
+            res.status(400).json({ message: "User ID is required!" });
             return;
         }
-        const user = await User.findById(userId).populate('rooms').lean();
+
+        const user = await User.findById(userId).lean();
         if (!user) {
-            res.status(404).json({message: "User not found"});
+            res.status(404).json({ message: "User not found" });
             return;
         }
+
         if (!user.rooms || user.rooms.length === 0) {
-            res.status(404).json({message: "User has no rooms"});
+            res.status(404).json({ message: "User has no rooms" });
             return;
         }
 
         // Fetch rooms where the user is a member, sorted by most recent chat
         const rooms = await Room.aggregate([
-            {$match: {_id: {$in: user.rooms}}}, // Match rooms where user is a member
+            { $match: { _id: { $in: user.rooms } } }, // Match rooms where user is a member
             {
                 $addFields: {
-                    latestChat: {$arrayElemAt: ["$chats", -1]} // Get the most recent chat message
+                    latestChat: { $arrayElemAt: ["$chats", -1] } // Get the most recent chat message
                 }
             },
-            {$sort: {"latestChat.timestamps": -1}}, // Sort rooms by latest chat
+            { $sort: { "latestChat.timestamps": -1 } }, // Sort rooms by latest chat
             {
                 $lookup: {
                     from: "users",
@@ -147,11 +149,31 @@ export const getRooms = async (req: Request, res: Response, next: NextFunction):
                 $project: {
                     name: 1,
                     isGroup: 1,
-                    membersData: 1,
-                    adminsData: 1,
+                    membersEmails: {
+                        $map: {
+                            input: "$membersData",
+                            as: "member",
+                            in: {
+                                email: "$$member.email",
+                                name: "$$member.name",
+                                photo: "$$member.photo"
+                            }
+                        }
+                    },
+                    adminsEmails: {
+                        $map: {
+                            input: "$adminsData",
+                            as: "admin",
+                            in: {
+                                email: "$$admin.email",
+                                name: "$$admin.name",
+                                photo: "$$admin.photo"
+                            }
+                        }
+                    },
                     latestChat: {
                         $cond: {
-                            if: {$eq: ["latestChat.dataType", "text"]},
+                            if: { $eq: ["$latestChat.dataType", "text"] },
                             then: {
                                 $function: {
                                     body: decryptText, // Call decryption function
@@ -167,8 +189,8 @@ export const getRooms = async (req: Request, res: Response, next: NextFunction):
         ]);
 
         res.json(rooms);
-    } catch (error){
+    } catch (error) {
         next(error);
     }
-}
+};
 

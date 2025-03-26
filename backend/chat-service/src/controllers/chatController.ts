@@ -173,10 +173,15 @@ export const getChatMessages = async (req: Request, res: Response, next: NextFun
             {$unwind: "$chats"},
             {$sort: {"chats.timestamps": -1}}, // Sort by latest messages
             {$skip: SKIP},
-            {$limit: LIMIT}
+            {$limit: LIMIT+1}
         ]);
 
-        const decryptedChats = chats.map(chat => {
+        const hasMore = chats.length > LIMIT; // If extra message exists, there are more
+
+        // Remove the extra message before returning
+        const trimmedChats = hasMore ? chats.slice(0, LIMIT) : chats;
+
+        const decryptedChats = trimmedChats.map(chat => {
             try {
                 let decryptedContent;
                 switch (chat.chats.dataType) {
@@ -203,7 +208,7 @@ export const getChatMessages = async (req: Request, res: Response, next: NextFun
             }
         });
 
-        res.status(200).json({success: true, chats: decryptedChats, hasMore: decryptedChats.length === LIMIT});
+        res.status(200).json({success: true, chats: decryptedChats, hasMore: hasMore});
 
     } catch (error) {
         next(error);

@@ -12,10 +12,10 @@ router.post('/save-message',saveMessage);
 router.post('/create-room', createChatroom);
 
 // fetch list of chats
-router.get('/get-rooms', getRooms);
+router.post('/get-rooms', getRooms);
 
 // fetch list of messages in  a chat group
-router.get('/get-chat',getChatMessages);
+router.post('/get-chat',getChatMessages);
 
 // update the read-by list
 router.put('/read', readMessage);
