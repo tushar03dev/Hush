@@ -6,14 +6,13 @@ import {
     removeAdmin,
     removeUser,
     sendMessageToChatService
-} from "../controllers/chatController";
+} from "../controllers/chatServiceController";
 import {authenticateToken, AuthRequest} from "../middleware/authMiddleware";
 
 const router = express.Router();
 
 router.post("/send",authenticateToken, async (req: AuthRequest, res: Response): Promise<void> => {
     try {
-
         const { receiverId, roomId, type, data } = req.body;
         // check if user is defined
         if (!req.user) {
@@ -144,16 +143,18 @@ router.post("/add-user",authenticateToken, async (req: AuthRequest, res: Respons
             res.status(401).json({ success: false, error: "User not found" });
             return;
         }
+        const {participant,roomId} = req.body;
+
         // Forward the request to the Chat Service
-        const response = await addUser(req.body);
+        const response = await addUser({participant,roomId},userId);
 
         if (response.success) {
-            res.status(200).json({ success: true, message: "Message processed successfully." });
+            res.status(200).json({ success: true, message:response});
         } else {
             res.status(500).json({ success: false, error: "Failed to send message." });
         }
     } catch (error) {
-        console.error("[API Gateway] Error:", error);
+        console.error("[API Gateway] Error in adding user:", error);
         res.status(500).json({ success: false, error: "Internal Server Error" });
     }
 });
@@ -172,12 +173,12 @@ router.post("/remove-user",authenticateToken, async (req: AuthRequest, res: Resp
             res.status(401).json({ success: false, error: "User not found" });
             return;
         }
-
+        const {participant,roomId} = req.body;
         // Forward the request to the Chat Service
-        const response = await removeUser(req.body);
-
+        const response = await removeUser({participant,roomId},userId);
+        //console.log(response);
         if (response.success) {
-            res.status(200).json({ success: true, message: "Message processed successfully." });
+            res.status(200).json({ success: true, message: response });
         } else {
             res.status(500).json({ success: false, error: "Failed to send message." });
         }
@@ -201,12 +202,12 @@ router.post("/add-admin",authenticateToken, async (req: AuthRequest, res: Respon
             res.status(401).json({ success: false, error: "User not found" });
             return;
         }
-
+        const {participant} = req.body;
         // Forward the request to the Chat Service
-        const response = await addAdmin(req.body);
+        const response = await addAdmin({participant},userId);
 
         if (response.success) {
-            res.status(200).json({ success: true, message: "Message processed successfully." });
+            res.status(200).json({ success: true, message: response });
         } else {
             res.status(500).json({ success: false, error: "Failed to send message." });
         }
@@ -231,8 +232,9 @@ router.post("/remove-admin",authenticateToken, async (req: AuthRequest, res: Res
             return;
         }
 
+        const {participant} = req.body;
         // Forward the request to the Chat Service
-        const response = await removeAdmin(req.body);
+        const response = await removeAdmin({participant},userId);
 
         if (response.success) {
             res.status(200).json({ success: true, message: "Message processed successfully." });

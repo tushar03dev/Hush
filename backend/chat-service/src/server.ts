@@ -8,6 +8,7 @@ import dotenv from "dotenv";
 import { checkAdmin } from "./middleware/adminCheck";
 import multer from "multer";
 import {chatConsumer} from "./consumers/chatConsumer";
+import adminRoutes from "./routes/adminRoutes";
 
 dotenv.config();
 const app = express();
@@ -27,7 +28,7 @@ app.use(express.json());
 const upload = multer();
 app.use(upload.none());
 
-app.use('/admin', checkAdmin);
+app.use('/admin',adminRoutes);
 app.use('/chat', chatRoutes);
 
 server.listen(process.env.PORT, () => {

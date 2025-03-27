@@ -1,7 +1,12 @@
-import router from "./chatRoutes";
+import Router from 'express';
 import {addAdmin, addUser, removeAdmin, removeUser} from "../controllers/roomController";
+import {checkAdmin} from "../middleware/adminCheck";
 
-router.post('/remove-user',removeUser);
-router.post('/add-user',addUser);
-router.post('/remove-admin',removeAdmin);
-router.post('/add-admin',addAdmin);
+const router = Router();
+
+router.post('/remove-user',checkAdmin,removeUser);
+router.post('/add-user',checkAdmin,addUser);
+router.post('/remove-admin',checkAdmin,removeAdmin);
+router.post('/add-admin',checkAdmin,addAdmin);
+
+export default router;

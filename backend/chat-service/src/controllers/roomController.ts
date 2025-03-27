@@ -46,6 +46,7 @@ export const createChatroom = async(req: Request, res: Response, next: NextFunct
             res.status(400).json({ success: false, error: "One or more users not found" });
             return;
         }
+        userIds.push(userId as string);
 
         const newRoom = new Room({
             name: name,
@@ -70,7 +71,7 @@ export const createChatroom = async(req: Request, res: Response, next: NextFunct
 };
 
 export const removeUser = async (req: Request, res: Response, next: NextFunction):Promise<void> => {
-    const{room,participant} = req.body;
+    const{room, participant} = req.body;
     if(!participant) {
         res.status(400).json({error: "Participant ID is required"});
         return;
@@ -84,7 +85,7 @@ export const removeUser = async (req: Request, res: Response, next: NextFunction
         const participantId = user._id;
         await Room.findByIdAndUpdate(room._id,{$pull: { members: participantId }});
         await User.findByIdAndUpdate(user._id,{$pull: { rooms: room._id }});
-        res.status(201).json({msg:"Successfully member kicked-out the room"});
+        res.status(201).json({success:true, msg:"Successfully member kicked-out the room"});
     } catch(error){
         next(error);
     }
@@ -108,7 +109,7 @@ export const addUser = async(req: Request, res: Response, next: NextFunction):Pr
         await User.findByIdAndUpdate(participantId, {
             $push: {rooms: room._id}
         })
-        res.status(201).json({msg:"Successfully member inserted the room"});
+        res.status(201).json({success:true, msg:"Successfully member inserted the room"});
     } catch(error){
         next(error);
     }
@@ -127,6 +128,10 @@ export const addAdmin = async(req: Request, res: Response, next: NextFunction):P
             return;
         }
         const participantId = user._id;
+        if(!room.members.includes(participantId)) {
+            res.status(404).send({ success: false, error: "Participant does not belong to this group" });
+            return;
+        }
         Room.findByIdAndUpdate(room._id,{$push: { admins: participantId }});
         res.status(201).json({msg:"Successfully member inserted the room"});
     } catch(error){

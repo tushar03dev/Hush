@@ -63,9 +63,13 @@ export async function getRooms( userId: string): Promise<void> {
 }
 
 
-export async function addUser(message: any) {
+export async function addUser(message: any,userId: string) {
     try {
-        const response = await axios.post(`${CHAT_SERVICE_URL}/admin/add-user`, message);
+        const response = await axios.post(`${CHAT_SERVICE_URL}/admin/add-user`,message,{
+            headers: {
+                "user-id": userId // Pass userId in headers
+            }
+        });
         return response.data;
     } catch (error) {
         console.error("[API Gateway] Failed to reach Chat Service for adding user:", error);
@@ -73,9 +77,13 @@ export async function addUser(message: any) {
     }
 }
 
-export async function removeUser(message: any) {
+export async function removeUser(message: any,userId:string) {
     try {
-        const response = await axios.post(`${CHAT_SERVICE_URL}/admin/remove-user`, message);
+        const response = await axios.post(`${CHAT_SERVICE_URL}/admin/remove-user`,message,{
+            headers: {
+                "user-id": userId // Pass userId in headers
+            }
+        });
         return response.data;
     } catch (error) {
         console.error("[API Gateway] Failed to reach Chat Service for removing user:", error);
@@ -83,9 +91,13 @@ export async function removeUser(message: any) {
     }
 }
 
-export async function addAdmin(message: any) {
+export async function addAdmin(message: any,userId:string) {
     try {
-        const response = await axios.post(`${CHAT_SERVICE_URL}/admin/add-admin`, message);
+        const response = await axios.post(`${CHAT_SERVICE_URL}/admin/add-admin`,message,{
+            headers: {
+                "user-id": userId // Pass userId in headers
+            }
+        });
         return response.data;
     } catch (error) {
         console.error("[API Gateway] Failed to reach Chat Service for adding admin:", error);
@@ -93,9 +105,13 @@ export async function addAdmin(message: any) {
     }
 }
 
-export async function removeAdmin(message: any) {
+export async function removeAdmin(message: any,userId:string) {
     try {
-        const response = await axios.post(`${CHAT_SERVICE_URL}/admin/remove-admin`, message);
+        const response = await axios.post(`${CHAT_SERVICE_URL}/admin/remove-admin`,message,{
+            headers: {
+                "user-id": userId // Pass userId in headers
+            }
+        });
         return response.data;
     } catch (error) {
         console.error("[API Gateway] Failed to reach Chat Service for removing admin:", error);

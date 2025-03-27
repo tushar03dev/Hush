@@ -2,7 +2,7 @@ import {
     otpVerificationRequestToAuthService,
     signInRequestToAuthService,
     signUpRequestToAuthService
-} from "../controllers/authController";
+} from "../controllers/authServiceController";
 import router from "./chatRoutes";
 import {authenticateToken} from "../middleware/authMiddleware";
 
