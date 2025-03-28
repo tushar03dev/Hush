@@ -2,11 +2,11 @@ import {Room} from "../models/roomModel";
 import {Request, Response, NextFunction} from "express";
 import {User} from "../models/userModel";
 import {decryptText} from "../utils/textEncryption";
-import mongoose from "mongoose";
 
 
 export const createChatroom = async(req: Request, res: Response, next: NextFunction):Promise<void> => {
     try {
+
         // Extract user email from headers
         const userEmail = req.headers["user-id"];
         if (!userEmail || typeof userEmail !== "string") {
@@ -57,7 +57,7 @@ export const createChatroom = async(req: Request, res: Response, next: NextFunct
 
         const room = await newRoom.save();
 
-        // Correct iteration using `for...of`
+        //  using "for...of" for looping over values
         for (const memberId of userIds) {
             await User.findByIdAndUpdate(memberId, {
                 $push: { rooms: room._id }
@@ -83,6 +83,14 @@ export const removeUser = async (req: Request, res: Response, next: NextFunction
             return;
         }
         const participantId = user._id;
+        if(!room.members.includes(participantId)) {
+            res.status(404).send({ success: false, error: "Participant already does not belong to this group" });
+            return;
+        }
+        if(room.admins.includes(participantId)) {
+            res.status(404).send({ success: false, error: "Participant is an admin of the group. Need to evoke the admin rights first" });
+            return;
+        }
         await Room.findByIdAndUpdate(room._id,{$pull: { members: participantId }});
         await User.findByIdAndUpdate(user._id,{$pull: { rooms: room._id }});
         res.status(201).json({success:true, msg:"Successfully member kicked-out the room"});
@@ -104,6 +112,10 @@ export const addUser = async(req: Request, res: Response, next: NextFunction):Pr
             return;
         }
         const participantId = user._id;
+        if(room.members.includes(participantId)) {
+            res.status(404).send({ success: false, error: "Participant is already a member of this group" });
+            return;
+        }
 
         await Room.findByIdAndUpdate(room._id,{$push: { members: participantId }});
         await User.findByIdAndUpdate(participantId, {
@@ -132,8 +144,13 @@ export const addAdmin = async(req: Request, res: Response, next: NextFunction):P
             res.status(404).send({ success: false, error: "Participant does not belong to this group" });
             return;
         }
-        Room.findByIdAndUpdate(room._id,{$push: { admins: participantId }});
-        res.status(201).json({msg:"Successfully member inserted the room"});
+        if(room.admins.includes(participantId)) {
+            res.status(404).send({ success: false, error: "Participant is already an admin to this group" });
+            return;
+        }
+
+        await Room.findByIdAndUpdate(room._id,{$push: { admins: participantId }});
+        res.status(201).json({success:true,msg:"Successfully granted admin status to the participant"});
     } catch(error){
         next(error);
     }
@@ -151,9 +168,18 @@ export const removeAdmin = async(req: Request, res: Response, next: NextFunction
             res.status(404).send({ success: false, error: "User not found." });
             return;
         }
+
         const participantId = user._id;
-        Room.findByIdAndUpdate(room._id,{$pull: { admins: participantId }});
-        res.status(201).json({msg:"Successfully removed from admin status"});
+        if(!room.members.includes(participantId)) {
+            res.status(404).send({ success: false, error: "Participant does not belong to this group" });
+            return;
+        }
+        if(!room.admins.includes(participantId)) {
+            res.status(404).send({ success: false, error: "Participant is already not an admin" });
+            return;
+        }
+        await Room.findByIdAndUpdate(room._id,{$pull: { admins: participantId }});
+        res.status(201).json({success:true,msg:"Successfully removed from admin status"});
     } catch(error){
         next(error);
     }
@@ -254,3 +280,4 @@ export const getRooms = async (req: Request, res: Response, next: NextFunction):
     }
 };
 
+//

@@ -202,9 +202,9 @@ router.post("/add-admin",authenticateToken, async (req: AuthRequest, res: Respon
             res.status(401).json({ success: false, error: "User not found" });
             return;
         }
-        const {participant} = req.body;
+        const {participant,roomId} = req.body;
         // Forward the request to the Chat Service
-        const response = await addAdmin({participant},userId);
+        const response = await addAdmin({participant,roomId},userId);
 
         if (response.success) {
             res.status(200).json({ success: true, message: response });
@@ -232,12 +232,13 @@ router.post("/remove-admin",authenticateToken, async (req: AuthRequest, res: Res
             return;
         }
 
-        const {participant} = req.body;
+        const {participant,roomId} = req.body;
+        console.log(req.body);
         // Forward the request to the Chat Service
-        const response = await removeAdmin({participant},userId);
+        const response = await removeAdmin({participant,roomId},userId);
 
         if (response.success) {
-            res.status(200).json({ success: true, message: "Message processed successfully." });
+            res.status(200).json({ success: true, message: response });
         } else {
             res.status(500).json({ success: false, error: "Failed to send message." });
         }
