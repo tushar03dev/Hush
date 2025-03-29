@@ -6,25 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="df8e7eea-52dd-4b96-aec7-56900cc12d1a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/api-gateway/src/controllers/chatServiceController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api-gateway/src/controllers/chatServiceController.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/api-gateway/src/routes/chatRoutes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api-gateway/src/routes/chatRoutes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/controllers/roomController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/controllers/roomController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/eslint.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/vite.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/assets/react.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/main.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/vite-env.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/tsconfig.app.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/tsconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/tsconfig.node.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/vite.config.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/notification-service/src/config/db.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/notification-service/src/config/nodemailerConfig.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/notification-service/src/controllers/authController.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/notification-service/src/controllers/otpController.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/notification-service/src/middleware/authMiddleware.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/notification-service/src/routes/authRoutes.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/notification-service/src/routes/otpRoutes.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/notification-service/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/notification-service/src/server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Navbar.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,32 +59,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Node.js.encryptDecrypt.ts.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "javascript.nodejs.core.library.configured.version": "18.19.1",
-    "javascript.nodejs.core.library.typings.version": "18.19.75",
-    "last_opened_file_path": "/home/tushar/Documents/Projects/Hush/frontend/src",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "/home/tushar/Documents/Projects/Hush/backend/notification-service/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Node.js.encryptDecrypt.ts.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;18.19.1&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;18.19.75&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/tushar/Documents/node-app&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/tushar/Documents/Projects/Hush/backend/notification-service/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/frontend/src/components" />
       <recent name="$PROJECT_DIR$/frontend/src" />
       <recent name="$PROJECT_DIR$/frontend" />
       <recent name="$PROJECT_DIR$/frontend/public" />
       <recent name="$PROJECT_DIR$/backend/auth-service/src/utils" />
-      <recent name="$PROJECT_DIR$/backend/api-gateway/src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/backend/api-gateway/src" />
@@ -172,6 +164,11 @@
       <workItem from="1743057624254" duration="1731000" />
       <workItem from="1743063199331" duration="1524000" />
       <workItem from="1743137743951" duration="2468000" />
+      <workItem from="1743140232367" duration="1862000" />
+      <workItem from="1743156479564" duration="10000" />
+      <workItem from="1743158914115" duration="1955000" />
+      <workItem from="1743189576792" duration="248000" />
+      <workItem from="1743269148859" duration="2363000" />
     </task>
     <servers />
   </component>
