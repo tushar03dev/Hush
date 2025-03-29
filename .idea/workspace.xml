@@ -4,20 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df8e7eea-52dd-4b96-aec7-56900cc12d1a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/api-gateway/src/controllers/chatServiceController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api-gateway/src/controllers/chatServiceController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/api-gateway/src/routes/chatRoutes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api-gateway/src/routes/chatRoutes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/notification-service/src/config/db.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/notification-service/src/config/nodemailerConfig.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/notification-service/src/controllers/authController.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/notification-service/src/controllers/otpController.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/notification-service/src/middleware/authMiddleware.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/notification-service/src/routes/authRoutes.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/notification-service/src/routes/otpRoutes.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/notification-service/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/notification-service/src/server.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Navbar.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="df8e7eea-52dd-4b96-aec7-56900cc12d1a" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -168,7 +155,7 @@
       <workItem from="1743156479564" duration="10000" />
       <workItem from="1743158914115" duration="1955000" />
       <workItem from="1743189576792" duration="248000" />
-      <workItem from="1743269148859" duration="2363000" />
+      <workItem from="1743269148859" duration="2545000" />
     </task>
     <servers />
   </component>
