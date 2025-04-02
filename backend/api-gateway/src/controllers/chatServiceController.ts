@@ -1,120 +1,232 @@
+import {Response} from "express";
 import axios from "axios";
 import dotenv from "dotenv";
-import {IUser} from "../models/userModel";
+import {AuthRequest} from "../middleware/authMiddleware";
+
 dotenv.config();
 const CHAT_SERVICE_URL = process.env.CHAT_SERVICE_URL as string;
 
-export async function sendMessageToChatService(message: any, userId: string): Promise<void> {
+function extractUser(req: any) {
+    // check if user is defined
+    if (!req.user || !req.user.userId) {
+        return null;
+    }
+    return req.user.userId;
+
+}
+
+export async function sendMessageToChatService(req: AuthRequest, res: Response): Promise<void> {
     try {
-        const response = await axios.post(`${CHAT_SERVICE_URL}/chat/save-message`, message,{
+        const {receiverId, roomId, type, data} = req.body;
+        const userId = extractUser(req);
+
+        // check if UserId exists
+        if (!userId) {
+            res.status(401).json({success: false, error: "User not found"});
+            return;
+        }
+
+        const response = await axios.post(`${CHAT_SERVICE_URL}/chat/save-message`, {receiverId, roomId, type, data}, {
             headers: {
                 "user-id": userId // Pass userId in headers
             }
         });
-        return response.data;
+
+        if (response.data.success) {
+            res.status(200).json({success: true, message: response.data});
+        } else {
+            res.status(500).json({success: false, error: "Failed to send message."});
+        }
     } catch (error) {
         console.error("[API Gateway] Failed to reach Chat Service for sending message:", error);
         return;
     }
 }
 
-export async function getChat(message: any, userId: string): Promise<void> {
+export async function getChat(req: AuthRequest, res: Response): Promise<void> {
     try {
-        const response = await axios.post(`${CHAT_SERVICE_URL}/chat/get-chat`, message,{
+        const {roomId, limit, skip} = req.body;
+        const userId = extractUser(req);
+
+        // check if UserId exists
+        if (!userId) {
+            res.status(401).json({success: false, error: "User not found"});
+            return;
+        }
+
+        const response = await axios.post(`${CHAT_SERVICE_URL}/chat/get-chat`, {roomId, limit, skip}, {
             headers: {
                 "user-id": userId // Pass userId in headers
             }
         });
-        return response.data;
+
+        if (response.data.success) {
+            res.status(200).json({success: true, message: response.data});
+        } else {
+            res.status(500).json({success: false, error: "Failed to send message."});
+        }
     } catch (error) {
         console.error("[API Gateway] Failed to reach Chat Service for retrieving chat:", error);
         return;
     }
 }
 
-export async function createRoom(message: any, userId: string): Promise<void> {
-    try{
-        const response = await axios.post(`${CHAT_SERVICE_URL}/chat/create-room`,message,{
+export async function createRoom(req: AuthRequest, res: Response): Promise<void> {
+    try {
+        const {name, participants} = req.body;
+        const userId = extractUser(req);
+
+        // check if UserId exists
+        if (!userId) {
+            res.status(401).json({success: false, error: "User not found"});
+            return;
+        }
+
+        const response = await axios.post(`${CHAT_SERVICE_URL}/chat/create-room`, {name, participants}, {
             headers: {
                 "user-id": userId // Pass userId in headers
             }
         });
-        return response.data;
-    }catch(error){
+        if (response.data.success) {
+            res.status(200).json({success: true, message: response.data});
+        } else {
+            res.status(500).json({success: false, error: "Failed to send message."});
+        }
+    } catch (error) {
         console.error("[API Gateway] Failed to reach Chat Service for creating room:", error);
         return;
     }
 }
 
 
-
-export async function getRooms( userId: string): Promise<void> {
+export async function getRooms(req: AuthRequest, res: Response): Promise<void> {
     try {
-        const response = await axios.post(`${CHAT_SERVICE_URL}/chat/get-rooms`,{},{
+        const userId = extractUser(req);
+
+        // check if UserId exists
+        if (!userId) {
+            res.status(401).json({success: false, error: "User not found"});
+            return;
+        }
+
+        const response = await axios.post(`${CHAT_SERVICE_URL}/chat/get-rooms`, {}, {
             headers: {
                 "user-id": userId // Pass userId in headers
             }
         });
-        return response.data;
+        if (response.data.success) {
+            res.status(200).json({success: true, message: response.data});
+        } else {
+            res.status(500).json({success: false, error: "Failed to send message."});
+        }
     } catch (error) {
         console.error("[API Gateway] Failed to reach Chat Service for retrieving rooms:", error);
-        return;
     }
 }
 
 
-export async function addUser(message: any,userId: string) {
+export async function addUser(req: AuthRequest, res: Response): Promise<void> {
     try {
-        const response = await axios.post(`${CHAT_SERVICE_URL}/admin/add-user`,message,{
+        const {participant, roomId} = req.body;
+        const userId = extractUser(req);
+
+        // check if UserId exists
+        if (!userId) {
+            res.status(401).json({success: false, error: "User not found"});
+            return;
+        }
+
+        const response = await axios.post(`${CHAT_SERVICE_URL}/admin/add-user`, {participant, roomId}, {
             headers: {
                 "user-id": userId // Pass userId in headers
             }
         });
-        return response.data;
+        if (response.data.success) {
+            res.status(200).json({success: true, message: response.data});
+        } else {
+            res.status(500).json({success: false, error: "Failed to send message."});
+        }
     } catch (error) {
         console.error("[API Gateway] Failed to reach Chat Service for adding user:", error);
-        return { success: false, error: "Chat Service unavailable" };
     }
 }
 
-export async function removeUser(message: any,userId:string) {
+export async function removeUser(req: AuthRequest, res: Response): Promise<void> {
     try {
-        const response = await axios.post(`${CHAT_SERVICE_URL}/admin/remove-user`,message,{
+        const {participant, roomId} = req.body;
+        const userId = extractUser(req);
+
+        // check if UserId exists
+        if (!userId) {
+            res.status(401).json({success: false, error: "User not found"});
+            return;
+        }
+
+        const response = await axios.post(`${CHAT_SERVICE_URL}/admin/remove-user`, {participant, roomId}, {
             headers: {
                 "user-id": userId // Pass userId in headers
             }
         });
-        return response.data;
+        if (response.data.success) {
+            res.status(200).json({success: true, message: response.data});
+        } else {
+            res.status(500).json({success: false, error: "Failed to send message."});
+        }
     } catch (error) {
         console.error("[API Gateway] Failed to reach Chat Service for removing user:", error);
-        return { success: false, error: "Chat Service unavailable" };
     }
 }
 
-export async function addAdmin(message: any,userId:string) {
+export async function addAdmin(req: AuthRequest, res: Response) {
     try {
-        const response = await axios.post(`${CHAT_SERVICE_URL}/admin/add-admin`,message,{
+        const {participant, roomId} = req.body;
+        const userId = extractUser(req);
+
+        // check if UserId exists
+        if (!userId) {
+            res.status(401).json({success: false, error: "User not found"});
+            return;
+        }
+
+        const response = await axios.post(`${CHAT_SERVICE_URL}/admin/add-admin`, {participant, roomId}, {
             headers: {
                 "user-id": userId // Pass userId in headers
             }
         });
-        return response.data;
+
+        if (response.data.success) {
+            res.status(200).json({success: true, message: response.data});
+        } else {
+            res.status(500).json({success: false, error: "Failed to send message."});
+        }
     } catch (error) {
         console.error("[API Gateway] Failed to reach Chat Service for adding admin:", error);
-        return { success: false, error: "Chat Service unavailable" };
     }
 }
 
-export async function removeAdmin(message: any,userId:string) {
+export async function removeAdmin(req: AuthRequest, res: Response) {
     try {
-        const response = await axios.post(`${CHAT_SERVICE_URL}/admin/remove-admin`,message,{
+        const {participant, roomId} = req.body;
+        const userId = extractUser(req);
+
+        // check if UserId exists
+        if (!userId) {
+            res.status(401).json({success: false, error: "User not found"});
+            return;
+        }
+
+        const response = await axios.post(`${CHAT_SERVICE_URL}/admin/remove-admin`, {participant, roomId}, {
             headers: {
                 "user-id": userId // Pass userId in headers
             }
         });
-        return response.data;
+
+        if (response.data.success) {
+            res.status(200).json({success: true, message: response.data});
+        } else {
+            res.status(500).json({success: false, error: "Failed to send message."});
+        }
     } catch (error) {
         console.error("[API Gateway] Failed to reach Chat Service for removing admin:", error);
-        return { success: false, error: "Chat Service unavailable" };
     }
 }

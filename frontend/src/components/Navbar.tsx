@@ -24,7 +24,7 @@ export default function Navbar({ navigateTo }: NavbarProps) {
             }}
           >
             <span className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-cyan-500 text-transparent bg-clip-text">
-              ChatSphere
+              Hush
             </span>
           </a>
 
