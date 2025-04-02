@@ -27,7 +27,6 @@ router.post("/add-admin",authenticateToken,addAdmin);
 
 router.post("/remove-admin",authenticateToken,removeAdmin);
 
-
-
-
 export default router;
+
+

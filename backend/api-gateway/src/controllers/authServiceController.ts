@@ -4,12 +4,12 @@ import dotenv from "dotenv";
 dotenv.config();
 const AUTH_SERVICE_URL = process.env.AUTH_SERVICE_URL as string;
 
-export async function signInRequestToAuthService(req: Request, res:Response): Promise<void> {
+export async function signInRequestToAuthService(req: Request, res:Response) {
     try {
         const {email, password} = req.body;
         const response = await axios.post(`${AUTH_SERVICE_URL}/auth/sign-in`,{email, password});
         if (response.data.success) {
-            res.status(200).json(response);
+            res.status(200).json(response.data);
         } else {
             res.status(500).json({ success: false, error: "Failed to send message." });
         }
@@ -18,12 +18,12 @@ export async function signInRequestToAuthService(req: Request, res:Response): Pr
     }
 }
 
-export async function signUpRequestToAuthService(req:Request, res:Response): Promise<void> {
+export async function signUpRequestToAuthService(req:Request, res:Response) {
     try {
         const {name, email, password} = req.body;
         const response = await axios.post(`${AUTH_SERVICE_URL}/auth/sign-up`,{name, email, password});
     if (response.data.success) {
-        res.status(200).json(response);
+        res.status(200).json(response.data);
     } else {
         res.status(500).json({ success: false, error: "Failed to send message." });
     }
@@ -32,12 +32,12 @@ export async function signUpRequestToAuthService(req:Request, res:Response): Pro
     }
 }
 
-export async function otpVerificationRequestToAuthService(req:Request, res:Response):Promise<void> {
+export async function otpVerificationRequestToAuthService(req:Request, res:Response) {
     try {
         const {otpToken, otp} = req.body;
         const response = await axios.post(`${AUTH_SERVICE_URL}/otp/verify`, {otpToken, otp});
         if (response.data.success) {
-    res.status(200).json(response);
+    res.status(200).json(response.data);
 } else {
     res.status(500).json({ success: false, error: "Failed to send message." });
 }

@@ -1,9 +1,11 @@
+import express from "express";
 import {
     otpVerificationRequestToAuthService,
     signInRequestToAuthService,
     signUpRequestToAuthService
 } from "../controllers/authServiceController";
-import router from "./chatRoutes";
+
+const router = express.Router();
 
 router.post("/sign-in",signInRequestToAuthService);
 

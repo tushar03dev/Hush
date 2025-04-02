@@ -39,11 +39,10 @@ export async function sendMessageToChatService(req: AuthRequest, res: Response):
         }
     } catch (error) {
         console.error("[API Gateway] Failed to reach Chat Service for sending message:", error);
-        return;
     }
 }
 
-export async function getChat(req: AuthRequest, res: Response): Promise<void> {
+export async function getChat(req: AuthRequest, res: Response) {
     try {
         const {roomId, limit, skip} = req.body;
         const userId = extractUser(req);
@@ -67,7 +66,6 @@ export async function getChat(req: AuthRequest, res: Response): Promise<void> {
         }
     } catch (error) {
         console.error("[API Gateway] Failed to reach Chat Service for retrieving chat:", error);
-        return;
     }
 }
 
@@ -94,7 +92,6 @@ export async function createRoom(req: AuthRequest, res: Response): Promise<void>
         }
     } catch (error) {
         console.error("[API Gateway] Failed to reach Chat Service for creating room:", error);
-        return;
     }
 }
 
