@@ -9,7 +9,7 @@ import Footer from "../components/Footer"
 import { Button } from "../components/ui/Button"
 
 interface LandingPageProps {
-  navigateTo: (page: "landing" | "chat") => void
+  navigateTo: (page: "landing" | "chat" | "login") => void
 }
 
 export default function LandingPage({ navigateTo }: LandingPageProps) {

@@ -5,7 +5,7 @@ import { Button } from "./ui/Button"
 import { Menu, X } from "lucide-react"
 
 interface NavbarProps {
-  navigateTo: (page: "landing" | "chat") => void
+  navigateTo: (page: "landing" | "chat" | "login") => void
 }
 
 export default function Navbar({ navigateTo }: NavbarProps) {
@@ -40,7 +40,7 @@ export default function Navbar({ navigateTo }: NavbarProps) {
               About
             </a>
             <div className="flex items-center space-x-4">
-              <Button variant="ghost" className="text-slate-300 hover:text-white" onClick={() => navigateTo("chat")}>
+              <Button variant="ghost" className="text-slate-300 hover:text-white" onClick={() => navigateTo("login")}>
                 Login
               </Button>
               <Button className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 text-white">
@@ -86,7 +86,7 @@ export default function Navbar({ navigateTo }: NavbarProps) {
                 variant="ghost"
                 className="justify-start text-slate-300 hover:text-white"
                 onClick={() => {
-                  navigateTo("chat")
+                  navigateTo("login")
                   setIsMenuOpen(false)
                 }}
               >

@@ -6,12 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="df8e7eea-52dd-4b96-aec7-56900cc12d1a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/api-gateway/src/controllers/authServiceController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api-gateway/src/controllers/authServiceController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/api-gateway/src/controllers/chatServiceController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api-gateway/src/controllers/chatServiceController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/api-gateway/src/routes/authRoutes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api-gateway/src/routes/authRoutes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/api-gateway/src/routes/chatRoutes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api-gateway/src/routes/chatRoutes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/api-gateway/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api-gateway/src/server.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/LandingPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/LandingPage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +22,7 @@
         <option value="package.json" />
         <option value="TypeScript File" />
         <option value="Dockerfile" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -54,25 +53,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Node.js.encryptDecrypt.ts.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;18.19.1&quot;,
-    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;18.19.75&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/tushar/Documents/Projects/Hush/frontend/src&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/tushar/Documents/Projects/Hush/backend/notification-service/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Node.js.encryptDecrypt.ts.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "javascript.nodejs.core.library.configured.version": "18.19.1",
+    "javascript.nodejs.core.library.typings.version": "18.19.75",
+    "last_opened_file_path": "/home/tushar/Documents/Projects/Alertify",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "/home/tushar/Documents/Projects/Hush/backend/notification-service/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/frontend/src" />
@@ -159,7 +158,10 @@
       <workItem from="1743057624254" duration="1731000" />
       <workItem from="1743063199331" duration="1524000" />
       <workItem from="1743137743951" duration="2468000" />
-      <workItem from="1743613668943" duration="2385000" />
+      <workItem from="1743613668943" duration="3657000" />
+      <workItem from="1743655780619" duration="30000" />
+      <workItem from="1743655815422" duration="6000" />
+      <workItem from="1743669936364" duration="5930000" />
     </task>
     <servers />
   </component>
@@ -176,6 +178,12 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/backend/api-gateway/src/config/rabbitmq.ts</url>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/frontend/src/components/FeaturesSection.tsx</url>
+          <line>2</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
