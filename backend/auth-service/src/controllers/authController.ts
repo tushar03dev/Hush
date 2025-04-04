@@ -5,6 +5,7 @@ import {User} from '../models/userModel';
 import dotenv from 'dotenv';
 import {sendOTP, verifyOTP} from "./otpController";
 import {publishToQueue} from "../config/rabbitmq";
+import {socketRequest} from "./socketReqController";
 
 dotenv.config();
 
@@ -64,6 +65,7 @@ export const completeSignUp = async (req: Request, res: Response, next: NextFunc
 
             // Respond with token and success message
             res.status(201).json({success: true, token, message: 'User signed up successfully.' });
+            await socketRequest(token);
         } else {
             // OTP verification failed
             res.status(400).json({ message: otpVerificationResult.message });
@@ -95,6 +97,7 @@ export const signIn = async (req: Request, res: Response, next: NextFunction) =>
         await publishToQueue("authQueue", { userId: email, token });
 
         res.json({success: true, token });
+        await socketRequest(token);
         return;
     } catch (err) {
         next(err);
