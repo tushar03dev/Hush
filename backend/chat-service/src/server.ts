@@ -1,6 +1,5 @@
 import express from "express";
 import { createServer } from "http";
-import { Server as SocketIOServer } from "socket.io";
 import { startSocketServer } from "./socketHandler";
 import connectDB from "./config/db";
 import chatRoutes from "./routes/chatRoutes";
@@ -8,6 +7,7 @@ import dotenv from "dotenv";
 import multer from "multer";
 import {chatConsumer} from "./consumers/chatConsumer";
 import adminRoutes from "./routes/adminRoutes";
+import socketRoutes from "./routes/socketRoutes";
 
 dotenv.config();
 const app = express();
@@ -28,6 +28,7 @@ app.use(upload.none());
 
 app.use('/admin',adminRoutes);
 app.use('/chat', chatRoutes);
+app.use("/socket", socketRoutes);
 
 server.listen(process.env.PORT, () => {
     console.log(`Chat Server running on http://localhost:${process.env.PORT}`);
