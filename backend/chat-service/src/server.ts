@@ -1,11 +1,10 @@
 import express from "express";
 import { createServer } from "http";
 import { Server as SocketIOServer } from "socket.io";
-import { setupSocket } from "./socketHandler";
+import { startSocketServer } from "./socketHandler";
 import connectDB from "./config/db";
 import chatRoutes from "./routes/chatRoutes";
 import dotenv from "dotenv";
-import { checkAdmin } from "./middleware/adminCheck";
 import multer from "multer";
 import {chatConsumer} from "./consumers/chatConsumer";
 import adminRoutes from "./routes/adminRoutes";
@@ -18,8 +17,10 @@ const server = createServer(app); // Create an HTTP server
 const io = new SocketIOServer(server, { cors: { origin: "*" } });
 
 // Setup WebSocket and RabbitMQ consumer
-connectDB().then(() => chatConsumer());
-setupSocket(server); // ✅ Pass `server` instead of `io`
+connectDB().then(() => {
+    chatConsumer();
+    startSocketServer();
+});
 
 // Middleware
 app.use(express.json());
