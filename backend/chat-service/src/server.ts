@@ -13,9 +13,6 @@ dotenv.config();
 const app = express();
 const server = createServer(app); // Create an HTTP server
 
-// Pass the HTTP server to Socket.io
-const io = new SocketIOServer(server, { cors: { origin: "*" } });
-
 // Setup WebSocket and RabbitMQ consumer
 connectDB().then(() => {
     chatConsumer();
