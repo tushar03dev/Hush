@@ -6,9 +6,9 @@ import {decryptText, encryptText} from "../utils/textEncryption";
 import {encryptMedia, encryptAudio, decryptAudio, decryptMedia} from "../utils/avEncryption";
 import {decryptImage, encryptImage} from "../utils/imageEncryption";
 import mongoose from "mongoose";
-import {io} from "../socketHandler";
+import {activeUsers, io} from "../socketHandler";
 import axios from "axios";
-import {User} from "../models/userModel";
+import {IUser, User} from "../models/userModel";
 
 const API_GATEWAY_URL = process.env.API_GATEWAY_URL as string;
 
@@ -23,13 +23,13 @@ export const saveMessage = async (req: Request, res: Response, next: NextFunctio
         }
 
         // Fetch sender (user) ID from the database using email
-        const user = await User.findOne({email: userEmail});
+        const user = await User.findOne({email: userEmail}) as IUser;
         if (!user) {
             res.status(404).send({success: false, error: "User not found."});
             return;
         }
 
-        const userId = user._id; // MongoDB ID of sender
+        const userId = user._id;
 
         const {receiverId: receiverEmail, roomId, type, data} = req.body;
 
@@ -51,7 +51,7 @@ export const saveMessage = async (req: Request, res: Response, next: NextFunctio
         // **🔹 Handle First DM Message: Check if DM Room Exists or Create One**
         if (!roomId && receiverId) {
             room = await Room.findOne({
-                members: { $all: [userId, receiverId] },
+                members: {$all: [userId, receiverId]},
                 isGroup: false
             });
 
@@ -64,8 +64,8 @@ export const saveMessage = async (req: Request, res: Response, next: NextFunctio
 
                 // **Update both users to include the new room ID**
                 await User.updateMany(
-                    { _id: { $in: [userId, receiverId] } },
-                    { $addToSet: { rooms: room._id } } // Ensures no duplicate room IDs
+                    {_id: {$in: [userId, receiverId]}},
+                    {$addToSet: {rooms: room._id}} // Ensures no duplicate room IDs
                 );
             }
         } else {
@@ -78,7 +78,7 @@ export const saveMessage = async (req: Request, res: Response, next: NextFunctio
 
 
         // **🔹 Validate Sender (Ensure user is part of the chat)**
-        if (!room.members.includes(userId as mongoose.Types.ObjectId)) {
+        if (!room.members.includes(userId)) {
             res.status(403).send("You don't have access to this chat!");
             return;
         }
@@ -115,15 +115,44 @@ export const saveMessage = async (req: Request, res: Response, next: NextFunctio
                 } : {}),
             };
             console.log(chatMessage);
+
             // Save Message to Database ->
             // Publish Message to RabbitMQ (chatQueue)
             await publishToQueue("chatQueue", chatMessage);
 
-            // Emit Message via Socket.io (Real-time chat)
-            io.to(roomId).emit("newMessage", chatMessage);
-
             // Send message to API Gateway for notification processing
-            //await axios.post(`${API_GATEWAY_URL}/process-message`, chatMessage);
+            // Determine which users are online and offline
+            const memberIds = room.members.map((id) => id.toString());
+            const offlineUserIds: string[] = [];
+
+            memberIds.forEach((memberId) => {
+                const socketId = activeUsers.get(memberId) as string;
+                if (socketId) {
+                    // Online → emit real-time message via socket
+                    io.to(socketId).emit("newMessage", chatMessage);
+                } else if (memberId !== userId.toString()) {
+                    // Collect only *other* offline users (exclude sender)
+                    offlineUserIds.push(memberId);
+                }
+            });
+
+            //  Notify offline users via notification service
+            if (offlineUserIds.length > 0) {
+                try {
+                    await axios.post(`${API_GATEWAY_URL}/notify`, {
+                        to: offlineUserIds, // array of offline userIds
+                        message: {
+                            sender: userId,
+                            roomId: room._id,
+                            type,
+                            timestamp: chatMessage.timestamps
+                        }
+                    });
+                    console.log("Notification sent to offline users");
+                } catch (error) {
+                    console.error("Failed to notify offline users:", error);
+                }
+            }
 
             // Send Response
             res.status(200).json({
@@ -143,14 +172,14 @@ export const getChatMessages = async (req: Request, res: Response, next: NextFun
         // Extract user email from headers
         const userEmail = req.headers["user-id"];
         if (!userEmail || typeof userEmail !== "string") {
-            res.status(400).send({ success: false, error: "Unauthorized: Email not provided." });
+            res.status(400).send({success: false, error: "Unauthorized: Email not provided."});
             return;
         }
 
         // Fetch sender (user) ID from the database using email
-        const user = await User.findOne({ email: userEmail });
+        const user = await User.findOne({email: userEmail});
         if (!user) {
-            res.status(404).send({ success: false, error: "User not found." });
+            res.status(404).send({success: false, error: "User not found."});
             return;
         }
 
@@ -180,7 +209,7 @@ export const getChatMessages = async (req: Request, res: Response, next: NextFun
             {$unwind: "$chats"},
             {$sort: {"chats.timestamps": -1}}, // Sort by latest messages
             {$skip: SKIP},
-            {$limit: LIMIT+1}
+            {$limit: LIMIT + 1}
         ]);
 
         const hasMore = chats.length > LIMIT; // If extra message exists, there are more

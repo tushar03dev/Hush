@@ -8,15 +8,16 @@ dotenv.config();
 
 const API_GATEWAY_URL = process.env.API_GATEWAY_URL;
 const SOCKET_PORT = process.env.SOCKET_PORT;
+const REDIS_URL = process.env.REDIS_PORT;
 
-const activeUsers = new Map<string, string>(); // Maps userId -> socketId
+export const activeUsers = new Map<string, string>(); // Maps userId -> socketId
 const server = http.createServer();
 
 export const io = new Server(server, {
     cors: { origin: `${API_GATEWAY_URL}` },
 });
 
-const pubClient = createClient({ url: process.env.REDIS_URL || "redis://localhost:6379" });
+const pubClient = createClient({ url:`${REDIS_URL}` });
 const subClient = pubClient.duplicate();
 
 Promise.all([pubClient.connect(), subClient.connect()]).then(() => {
