@@ -6,9 +6,9 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const API_GATEWAY_URL = process.env.API_GATEWAY_URL;
-const SOCKET_PORT = process.env.SOCKET_PORT;
-const REDIS_URL = process.env.REDIS_PORT;
+const API_GATEWAY_URL = process.env.API_GATEWAY_URL as string;
+const SOCKET_PORT = process.env.SOCKET_PORT as string;
+const REDIS_URL = process.env.REDIS_URL as string;
 
 export const activeUsers = new Map<string, string>(); // Maps userId -> socketId
 const server = http.createServer();

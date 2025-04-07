@@ -46,7 +46,7 @@ export const createChatroom = async(req: Request, res: Response, next: NextFunct
             res.status(400).json({ success: false, error: "One or more users not found" });
             return;
         }
-        userIds.push(userId as string);
+        userIds.push(userId);
 
         const newRoom = new Room({
             name: name,
