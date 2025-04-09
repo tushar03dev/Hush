@@ -6,11 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="df8e7eea-52dd-4b96-aec7-56900cc12d1a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/api-gateway/src/routes/chatRoutes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api-gateway/src/routes/chatRoutes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/chat-service/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/chat-service/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/controllers/roomController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/controllers/roomController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/socketHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/socketHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/api-gateway/src/controllers/authServiceController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api-gateway/src/controllers/authServiceController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/controllers/socketReqController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/controllers/socketReqController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/routes/socketRoutes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/routes/socketRoutes.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,7 +165,11 @@
       <workItem from="1743761071729" duration="568000" />
       <workItem from="1743764058315" duration="13000" />
       <workItem from="1743871368422" duration="8046000" />
-      <workItem from="1744045748543" duration="2895000" />
+      <workItem from="1744045748543" duration="3433000" />
+      <workItem from="1744107261454" duration="4000" />
+      <workItem from="1744130242527" duration="630000" />
+      <workItem from="1744183565299" duration="1994000" />
+      <workItem from="1744217004142" duration="2696000" />
     </task>
     <servers />
   </component>

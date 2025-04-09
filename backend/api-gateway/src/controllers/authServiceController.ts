@@ -64,6 +64,7 @@ export async function sendSocketRequestToServer(req:AuthRequest, res:Response) {
             }
         });
         if (response.data.success) {
+            console.log(response.data);
             res.status(200).json({success: true, msg: response.data});
         } else{
             res.status(500).json({ success: false, error: "Socket not established" });

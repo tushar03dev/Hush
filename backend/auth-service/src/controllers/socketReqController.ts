@@ -13,7 +13,7 @@ export const socketRequest = async(token: string) => {
         }
     })
     if(response.data.success){
-        return {msg:"Socket established to the server"};
+        console.log({msg:"Socket established to the server"});
     } else{
         console.error(response.data);
     }
