@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="df8e7eea-52dd-4b96-aec7-56900cc12d1a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/api-gateway/src/controllers/authServiceController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api-gateway/src/controllers/authServiceController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/controllers/socketReqController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/controllers/socketReqController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/chat-service/src/routes/socketRoutes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/chat-service/src/routes/socketRoutes.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -169,7 +166,9 @@
       <workItem from="1744107261454" duration="4000" />
       <workItem from="1744130242527" duration="630000" />
       <workItem from="1744183565299" duration="1994000" />
-      <workItem from="1744217004142" duration="2696000" />
+      <workItem from="1744217004142" duration="3761000" />
+      <workItem from="1744259283338" duration="1000" />
+      <workItem from="1744305361591" duration="1644000" />
     </task>
     <servers />
   </component>
