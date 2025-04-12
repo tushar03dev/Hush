@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="df8e7eea-52dd-4b96-aec7-56900cc12d1a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/api-gateway/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api-gateway/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/api-gateway/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api-gateway/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +59,7 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;18.19.1&quot;,
     &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;18.19.75&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/tushar/Documents/Projects/Alertify&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/tushar/Documents/Projects/Hush/backend/api-gateway/src/config&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -70,18 +72,18 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/backend/api-gateway/src/config" />
       <recent name="$PROJECT_DIR$/frontend/src" />
       <recent name="$PROJECT_DIR$/frontend" />
       <recent name="$PROJECT_DIR$/frontend/public" />
       <recent name="$PROJECT_DIR$/backend/auth-service/src/utils" />
-      <recent name="$PROJECT_DIR$/backend/api-gateway/src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/backend/api-gateway/src/config" />
       <recent name="$PROJECT_DIR$/backend/api-gateway/src" />
       <recent name="$PROJECT_DIR$/backend/rabbitmq/config" />
       <recent name="$PROJECT_DIR$/backend/chat-service/src/config" />
       <recent name="$PROJECT_DIR$/backend/chat-service/src" />
-      <recent name="$PROJECT_DIR$/backend/auth-service/src/utils" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -168,7 +170,11 @@
       <workItem from="1744183565299" duration="1994000" />
       <workItem from="1744217004142" duration="3761000" />
       <workItem from="1744259283338" duration="1000" />
-      <workItem from="1744305361591" duration="1644000" />
+      <workItem from="1744305361591" duration="3519000" />
+      <workItem from="1744346901142" duration="4028000" />
+      <workItem from="1744351529672" duration="618000" />
+      <workItem from="1744397805808" duration="887000" />
+      <workItem from="1744467921490" duration="5000" />
     </task>
     <servers />
   </component>
@@ -181,10 +187,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/backend/authService/src/routes/otpRoutes.ts</url>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/backend/api-gateway/src/config/rabbitmq.ts</url>
-          <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/frontend/src/components/FeaturesSection.tsx</url>
