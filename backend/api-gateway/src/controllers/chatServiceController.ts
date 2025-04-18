@@ -2,6 +2,7 @@ import {Response} from "express";
 import axios from "axios";
 import dotenv from "dotenv";
 import {AuthRequest} from "../middleware/authMiddleware";
+import {sendRequest} from "../config/rabbitmq";
 
 dotenv.config();
 const CHAT_SERVICE_URL = process.env.CHAT_SERVICE_URL as string;
@@ -25,6 +26,8 @@ export async function sendMessageToChatService(req: AuthRequest, res: Response):
             res.status(401).json({success: false, error: "User not found"});
             return;
         }
+
+        sendRequest({userId,receiverId, roomId, type, data},"chat-queue");
 
         const response = await axios.post(`${CHAT_SERVICE_URL}/chat/save-message`, {receiverId, roomId, type, data}, {
             headers: {
