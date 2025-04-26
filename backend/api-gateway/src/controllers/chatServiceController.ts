@@ -189,16 +189,16 @@ export async function addAdmin(req: AuthRequest, res: Response) {
             return;
         }
 
-        const response = await axios.post(`${CHAT_SERVICE_URL}/admin/add-admin`, {participant, roomId}, {
-            headers: {
-                "user-id": userId // Pass userId in headers
-            }
+        // RPC Request
+        const result = await sendRPCRequest("chat-service-queue", {
+            type: "ADD_ADMIN",
+            payload: {userId, participant, roomId},
         });
 
-        if (response.data.success) {
-            res.status(200).json({success: true, message: response.data});
+        if (result.success) {
+            res.status(200).json({ success: true, data: result });
         } else {
-            res.status(500).json({success: false, error: "Failed to send message."});
+            res.status(500).json({ success: false, error: "Failed to send message." });
         }
     } catch (error) {
         console.error("[API Gateway] Failed to reach Chat Service for adding admin:", error);
