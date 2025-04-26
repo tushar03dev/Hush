@@ -1,6 +1,7 @@
 import {Response} from "express";
 import dotenv from "dotenv";
 import {AuthRequest} from "../middleware/authMiddleware";
+import {sendRPCRequest} from "../config/sendRPCRequest";
 
 dotenv.config();
 
