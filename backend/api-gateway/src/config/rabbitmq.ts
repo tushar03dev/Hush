@@ -7,32 +7,47 @@ const RABBITMQ_URL = process.env.RABBITMQ_URL as string;
 
 let connection: amqp.Connection | null = null;
 let channel: amqp.Channel | null = null;
+let isConnecting = false;
 
-export async function connectRabbitMQ(): Promise<amqp.Channel> {
-    if (channel) {
-        return channel;
-    }
+async function createConnection(): Promise<void> {
+    if (isConnecting) return; // Prevent multiple simultaneous connects
+    isConnecting = true;
 
     try {
         connection = await amqp.connect(RABBITMQ_URL);
         channel = await connection.createChannel();
 
-        console.log("✅ Connected to RabbitMQ");
+        console.log("Connected to RabbitMQ");
 
-        // Optional: Close RabbitMQ gracefully when Node exits
-        process.on("exit", async () => {
-            try {
-                await channel?.close();
-                await connection?.close();
-                console.log("Closed RabbitMQ connection gracefully");
-            } catch (error) {
-                console.error("Error closing RabbitMQ connection:", error);
-            }
+        // Handle connection close
+        connection.on("close", async () => {
+            console.error("RabbitMQ connection closed. Reconnecting...");
+            await reconnect();
         });
 
-        return channel;
-    } catch (err) {
-        console.error("RabbitMQ Connection Error:", err);
-        throw err;
+        // Handle connection error
+        connection.on("error", async (err) => {
+            console.error("RabbitMQ connection error:", err);
+            await reconnect();
+        });
+
+    } catch (error) {
+        console.error("Initial RabbitMQ connection failed. Retrying in 5 seconds...");
+        setTimeout(() => createConnection(), 5000);
+    } finally {
+        isConnecting = false;
     }
+}
+
+async function reconnect(): Promise<void> {
+    connection = null;
+    channel = null;
+    await createConnection();
+}
+
+export async function connectRabbitMQ(): Promise<amqp.Channel> {
+    if (!channel) {
+        await createConnection();
+    }
+    return channel as amqp.Channel;
 }
