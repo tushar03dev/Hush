@@ -3,22 +3,36 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-// change to RPC complete code
 const RABBITMQ_URL = process.env.RABBITMQ_URL as string;
 
 let connection: amqp.Connection | null = null;
 let channel: amqp.Channel | null = null;
 
-export const sendRequest = async(message:any) =>{
-    const connection =     await amqp.connect(RABBITMQ_URL);
-    const channel  = await connection.createChannel();
+export async function connectRabbitMQ(): Promise<amqp.Channel> {
+    if (channel) {
+        return channel;
+    }
 
-    const exchange = "request_exchange";
-    const routingKey = "routingKey";
+    try {
+        connection = await amqp.connect(RABBITMQ_URL);
+        channel = await connection.createChannel();
 
-    await channel.assertExchange(exchange,"direct",{durable:true});
-    await channel.publish(exchange,routeKey,Buffer.from(JSON.stringify(message)));
+        console.log("✅ Connected to RabbitMQ");
 
-    console.log(`Message sent with routing key: ${routeKey}`);
+        // Optional: Close RabbitMQ gracefully when Node exits
+        process.on("exit", async () => {
+            try {
+                await channel?.close();
+                await connection?.close();
+                console.log("Closed RabbitMQ connection gracefully");
+            } catch (error) {
+                console.error("Error closing RabbitMQ connection:", error);
+            }
+        });
 
+        return channel;
+    } catch (err) {
+        console.error("RabbitMQ Connection Error:", err);
+        throw err;
+    }
 }

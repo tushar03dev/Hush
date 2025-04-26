@@ -32,8 +32,8 @@ export async function sendRPCRequest(queueName: string, payload: any, timeoutMs 
     });
 }
 
-// Consume replyQueue once
-async function startReplyConsumer() {
+// Consume from replyQueue
+async function ReplyConsumer() {
     const channel = await connectRabbitMQ();
     const replyQueue = "apigateway-responses";
 
@@ -56,4 +56,4 @@ async function startReplyConsumer() {
     console.log(`Listening for replies on ${replyQueue}`);
 }
 
-startReplyConsumer();
+ReplyConsumer();
