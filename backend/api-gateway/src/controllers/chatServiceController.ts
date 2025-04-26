@@ -108,15 +108,16 @@ export async function getRooms(req: AuthRequest, res: Response): Promise<void> {
             return;
         }
 
-        const response = await axios.post(`${CHAT_SERVICE_URL}/chat/get-rooms`, {}, {
-            headers: {
-                "user-id": userId // Pass userId in headers
-            }
+        // RPC Request
+        const result = await sendRPCRequest("chat-service-queue", {
+            type: "GET_ROOMS",
+            payload: {userId},
         });
-        if (response.data.success) {
-            res.status(200).json({success: true, message: response.data});
+
+        if (result.success) {
+            res.status(200).json({ success: true, data: result });
         } else {
-            res.status(500).json({success: false, error: "Failed to send message."});
+            res.status(500).json({ success: false, error: "Failed to send message." });
         }
     } catch (error) {
         console.error("[API Gateway] Failed to reach Chat Service for retrieving rooms:", error);
