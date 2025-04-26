@@ -3,15 +3,11 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-
-
-
 // change to RPC complete code
 const RABBITMQ_URL = process.env.RABBITMQ_URL as string;
 
 let connection: amqp.Connection | null = null;
 let channel: amqp.Channel | null = null;
-
 
 export const sendRequest = async(message:any) =>{
     const connection =     await amqp.connect(RABBITMQ_URL);

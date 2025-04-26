@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df8e7eea-52dd-4b96-aec7-56900cc12d1a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/api-gateway/src/config/rabbitmq.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/api-gateway/src/config/rabbitmqRpc.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/api-gateway/src/controllers/chatServiceController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api-gateway/src/controllers/chatServiceController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/api-gateway/src/config/rabbitmq.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api-gateway/src/config/rabbitmq.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,6 +177,9 @@
       <workItem from="1744476331461" duration="137000" />
       <workItem from="1744738087707" duration="187000" />
       <workItem from="1744913915473" duration="4336000" />
+      <workItem from="1744999400688" duration="82000" />
+      <workItem from="1745255258515" duration="1472000" />
+      <workItem from="1745402061544" duration="3000" />
     </task>
     <servers />
   </component>

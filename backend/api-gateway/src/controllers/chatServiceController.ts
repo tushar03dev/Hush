@@ -18,32 +18,32 @@ function extractUser(req: any) {
 
 export async function sendMessageToChatService(req: AuthRequest, res: Response): Promise<void> {
     try {
-        const {receiverId, roomId, type, data} = req.body;
+        const { receiverId, roomId, type, data } = req.body;
         const userId = extractUser(req);
 
-        // check if UserId exists
+        // Check if userId exists
         if (!userId) {
-            res.status(401).json({success: false, error: "User not found"});
+            res.status(401).json({ success: false, error: "User not found" });
             return;
         }
 
-        sendRequest({userId,receiverId, roomId, type, data},"chat-queue");
-
-        const response = await axios.post(`${CHAT_SERVICE_URL}/chat/save-message`, {receiverId, roomId, type, data}, {
-            headers: {
-                "user-id": userId // Pass userId in headers
-            }
+        // RPC Request
+        const result = await sendRPCRequest("chat-service-queue", {
+            type: "SEND_MESSAGE",
+            payload: { userId, receiverId, roomId, type, data },
         });
 
-        if (response.data.success) {
-            res.status(200).json({success: true, message: response.data});
+        if (result.success) {
+            res.status(200).json({ success: true, data: result });
         } else {
-            res.status(500).json({success: false, error: "Failed to send message."});
+            res.status(500).json({ success: false, error: "Failed to send message." });
         }
     } catch (error) {
         console.error("[API Gateway] Failed to reach Chat Service for sending message:", error);
+        res.status(500).json({ success: false, error: "Internal Server Error" });
     }
 }
+
 
 export async function getChat(req: AuthRequest, res: Response) {
     try {
