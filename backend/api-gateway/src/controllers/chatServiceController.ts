@@ -1,11 +1,8 @@
 import {Response} from "express";
-import axios from "axios";
 import dotenv from "dotenv";
 import {AuthRequest} from "../middleware/authMiddleware";
-import {sendRequest} from "../config/rabbitmq";
 
 dotenv.config();
-const CHAT_SERVICE_URL = process.env.CHAT_SERVICE_URL as string;
 
 function extractUser(req: any) {
     // check if user is defined
